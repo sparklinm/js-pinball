@@ -22,8 +22,7 @@ const bricks = new Bricks({
 
 const balls = {
   start: {
-    time: 0,
-    direction: 0
+    time: 0
   },
   timeStamp: 0,
   data: [],
@@ -31,23 +30,25 @@ const balls = {
     for (let i = 0; i < num; i++) {
       this.data.push(new Ball({
         x: render.width / 2,
-        y: render.enclosurePos.left[render.enclosurePos.left.length - 1][1] - 20
+        y: render.enclosurePos.left[render.enclosurePos.left.length - 1][1] - 20,
+        v: 400
       }))
     }
   },
-  modifyBalls (attrs) {
+  modify (attrs) {
     this.data.forEach(ball => {
       Object.assign(ball, attrs)
     })
   },
   move () {
-    const s = getS(this.timeStamp - this.start.time, 400 / 1000)
-
-    this.start.time = this.timeStamp
+    console.log(this.timeStamp - this.start.time)
 
     this.data.forEach((ball, index) => {
       setTimeout(() => {
-        const point = util.getXY([ball.x, ball.y], this.start.direction, s)
+        const s = getS(this.timeStamp - this.start.time, ball.v / 1000)
+
+
+        const point = util.getXY([ball.x, ball.y], ball.k, s)
 
         ball.x = point[0]
         ball.y = point[1]
@@ -58,6 +59,7 @@ const balls = {
         })
       }, index * 100)
     })
+    this.start.time = this.timeStamp
   }
 }
 
@@ -81,7 +83,9 @@ function main () {
 
   switch (status) {
     case 'prepare':
-      balls.start.direction = render.aimLine(mouse)
+      balls.modify({
+        k: render.aimLine(mouse)
+      })
       break
     case 'runing':
       balls.timeStamp = timeStamp
@@ -100,9 +104,6 @@ function main () {
   balls.data.forEach(ball => {
     render.ball(ball)
   })
-
-
-
 
 
   // ctx.clearRect(0, 0, canvas.width, canvas.height)

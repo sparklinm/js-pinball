@@ -1,15 +1,9 @@
 export function collision (ball, obj) {
   const { enclosure, bottomBoundary, bricks } = obj
 
-  enclosure.left.forEach()
 }
 
 export function getXY (startPoint, k, ds) {
-  if (k >= 0) {
-    ds = ds >= 0 ? ds : -ds
-  } else {
-    ds = ds >= 0 ? -ds : ds
-  }
   const angle = Math.atan(k)
 
   return [
@@ -29,3 +23,6 @@ export function getSymmetryK (k2, k3) {
   return (2 * k3 + k2 * Math.pow(k3, 2) - k2) / (2 * k2 * k3 - Math.pow(k3, 2) + 1)
 
 }
+
+
+// https://blog.csdn.net/sinat_29890433/article/details/88946060
