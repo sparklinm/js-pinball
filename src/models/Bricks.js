@@ -3,7 +3,7 @@ import Brick from './Brick'
 export default class Bricks {
   constructor (edge) {
     this.edge = edge
-    this.r = 25
+    this.r = 26
     this.data = []
   }
   add () {

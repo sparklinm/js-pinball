@@ -2,27 +2,33 @@ import Render from './views/Render'
 import Bricks from './models/Bricks'
 import Ball from './models/Ball'
 import CanvasEvent from './CanvasEvent'
-import { getS } from './physical'
 // import global from './global'
 import * as util from './util'
+import physical from './physical'
+
+import stage from './stage'
+console.log(stage)
+
 
 
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 const render = new Render(canvas)
-const enclosure = render.enclosurePos
-const bottomBoundary = render.bottomBoundaryPos
+
+
 let status = 'prepare'
 let timeStamp = 0
+
 const bricks = new Bricks({
-  left: enclosure.left[0][0],
-  right: enclosure.right[0][0],
-  bottom: enclosure.left[0][1]
+  left: stage.enclosure.left.points[0][0],
+  right: stage.enclosure.right.points[0][0],
+  bottom: stage.enclosure.left.points[0][1]
 })
 
 const balls = {
   start: {
-    time: 0
+    time: 0,
+    v: 600
   },
   timeStamp: 0,
   data: [],
@@ -30,8 +36,9 @@ const balls = {
     for (let i = 0; i < num; i++) {
       this.data.push(new Ball({
         x: render.width / 2,
-        y: render.enclosurePos.left[render.enclosurePos.left.length - 1][1] - 20,
-        v: 400
+        y: stage.enclosure.left.points[stage.enclosure.left.points.length - 1][1] + 20,
+        v: 600,
+        status: 'prepare'
       }))
     }
   },
@@ -40,21 +47,49 @@ const balls = {
       Object.assign(ball, attrs)
     })
   },
+  // 初始化发射速度
+  initV () {
+    const [vx, vy] = util.getVxy(this.start.v, this.start.angle, this.start.direction)
+
+    this.data.forEach(ball => {
+      ball.vx = vx
+      ball.vy = vy
+      ball.v = this.start.v
+      ball.status = 'shooting'
+    })
+  },
+
   move () {
-    console.log(this.timeStamp - this.start.time)
+    const dtime = 7
 
     this.data.forEach((ball, index) => {
       setTimeout(() => {
-        const s = getS(this.timeStamp - this.start.time, ball.v / 1000)
+        if (ball.status === 'reset') {
+          if (ball.reset.index === ball.reset.points.length) {
+            ball.status = 'prepare'
+            return
+          }
+          ball.x = ball.reset.points[ball.reset.index][0]
+          ball.y = ball.reset.points[ball.reset.index][1]
+          ball.reset.index++
+          return
+        }
 
+        if (ball.status === 'prepare') {
+          return
+        }
 
-        const point = util.getXY([ball.x, ball.y], ball.k, s)
-
-        ball.x = point[0]
-        ball.y = point[1]
+        ball.x += ball.vx / 1000 * dtime
+        if (ball.status === 'moving') {
+          ball.vy += physical.g * dtime
+          ball.y += ball.vy / 1000 * dtime
+        } else {
+          ball.y += ball.vy / 1000 * dtime
+        }
         util.collision(ball, {
-          enclosure,
-          bottomBoundary,
+          enclosure: stage.enclosure,
+          landslide: stage.landslide,
+          canvasWidth: stage.canvasWidth,
           bricks: bricks.data
         })
       }, index * 100)
@@ -64,7 +99,9 @@ const balls = {
 }
 
 bricks.add()
-balls.add(10)
+balls.add(1)
+console.log(bricks.data)
+
 
 
 let mouse = {
@@ -77,15 +114,17 @@ function main () {
 
   const render = new Render(canvas)
 
-  render.enclosure()
-  render.bottomBoundary()
+  render.enclosure(stage.enclosure)
+  render.landslide(stage.landslide)
 
 
   switch (status) {
     case 'prepare':
-      balls.modify({
-        k: render.aimLine(mouse)
-      })
+      const obj = render.aimLine(mouse)
+
+      if (obj) {
+        Object.assign(balls.start, obj)
+      }
       break
     case 'runing':
       balls.timeStamp = timeStamp
@@ -128,6 +167,7 @@ canvasEvent.shot(() => {
   if (status === 'prepare') {
     mouse = {}
     balls.start.time = new Date().getTime()
+    balls.initV()
     status = 'runing'
   }
 })

@@ -1,4 +1,4 @@
-import { getXY } from '../util'
+import { getXY, getDirection } from '../util'
 
 export default class Render {
   constructor (canvas) {
@@ -6,79 +6,7 @@ export default class Render {
     this.ctx = this.canvas.getContext('2d')
     this.width = canvas.width
     this.height = canvas.height
-    this.init()
-  }
-
-  init () {
     this.background()
-    this._computePositions()
-  }
-
-  _computePositions () {
-    // left and right edge
-    const enclosurePositions = () => {
-      const left = 25
-      const top = 60
-      const bottom = this.height - 180
-      const middle = this.width / 2
-      const right = this.width - left
-      const leftPoints = [
-        [left, bottom],
-        [left, top],
-        [middle - 20, 100]
-      ]
-      const rightPoints = [
-        [right, bottom],
-        [right, top],
-        [middle + 20, 100]
-      ]
-
-      this.enclosurePos = {
-        left: leftPoints,
-        right: rightPoints
-      }
-    }
-
-    const bottomBoundary = () => {
-      const bottom = this.height - 120
-      const controlPotiontY = bottom + 40
-      const middle = this.width / 2
-      const controlPotiontOffsetX = 80
-
-      const begin = [0, bottom]
-      const cp1 = [middle - controlPotiontOffsetX, controlPotiontY]
-      const cp2 = [middle + controlPotiontOffsetX, controlPotiontY]
-      const end = [this.width, bottom]
-
-      this.bottomBoundaryPos = {
-        begin,
-        cp1,
-        cp2,
-        end,
-        dots: this.calculatePointsForBezierCurve(
-          100,
-          {
-            x: begin[0],
-            y: begin[1]
-          },
-          {
-            x: cp1[0],
-            y: cp1[1]
-          },
-          {
-            x: cp2[0],
-            y: cp2[1]
-          },
-          {
-            x: end[0],
-            y: end[1]
-          }
-        )
-      }
-    }
-
-    enclosurePositions()
-    bottomBoundary()
   }
 
   background () {
@@ -86,12 +14,13 @@ export default class Render {
     this.ctx.fillRect(0, 0, this.width, this.height)
   }
 
-  enclosure () {
-    const leftPoints = this.enclosurePos.left
-    const rightPoints = this.enclosurePos.right
+  enclosure (enclosure) {
+    this.enclosure = enclosure
+    const { points: leftPoints } = enclosure.left
+    const { points: rightPoints } = enclosure.right
 
     this.ctx.lineWidth = 4
-    this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'
+    this.ctx.strokeStyle = '#565656'
     this.ctx.beginPath()
     this.lines(this.ctx, leftPoints)
     this.ctx.stroke()
@@ -100,15 +29,21 @@ export default class Render {
     this.ctx.stroke()
   }
 
-  bottomBoundary () {
-    const { begin, cp1, cp2, end } = this.bottomBoundaryPos
+  landslide (landslide) {
+    this.landslide = landslide
+    const { begin, cp1, cp2, end } = landslide
 
     this.ctx.lineWidth = 4
-    this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'
+    this.ctx.fillStyle = landslide.fillColor
     this.ctx.beginPath()
     this.ctx.moveTo(...begin)
     this.ctx.bezierCurveTo(...cp1, ...cp2, ...end)
     this.ctx.stroke()
+
+    this.ctx.strokeStyle = '#565656'
+    this.ctx.lineTo(this.width, this.height)
+    this.ctx.lineTo(0, this.height)
+    this.ctx.fill()
   }
 
   brick (attrs) {
@@ -119,7 +54,7 @@ export default class Render {
       num: attrs.sides,
       fillStyle: attrs.color
     })
-    this.ctx.font = '16px SimSun, Songti SC'
+    this.ctx.font = '600 16px -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
     this.ctx.fillStyle = '#000'
     this.ctx.textAlign = 'center'
     this.ctx.textBaseline = 'middle'
@@ -132,14 +67,15 @@ export default class Render {
       y: attrs.y,
       r: attrs.size,
       startAngle: 0,
-      endAngle: 360
+      endAngle: 360,
+      color: attrs.color
     })
   }
 
   aimLine (mouse) {
     const startX = this.width / 2
     const startY =
-      this.enclosurePos.left[this.enclosurePos.left.length - 1][1] + 20
+      this.enclosure.left.points[this.enclosure.left.points.length - 1][1] + 20
 
     if (mouse.y < startY) {
       return
@@ -155,6 +91,10 @@ export default class Render {
     const distance =
       (endX - startX) / Math.cos(angle) || (endY - startY) / Math.sin(angle)
 
+    // 方向
+    // 1 代表沿直线x增大的方向，0 相反
+    const direction = distance >= 0 ? 1 : 0
+
     const gap = 40
     const r = 4
     const gapCenter = gap + 2 * r
@@ -163,9 +103,9 @@ export default class Render {
     const drawArrow = () => {
       const arrowH = 25
       const arrowGap = 15
-      const ds1 = distance >= 0 ? (arrowH + arrowGap) : -(arrowH + arrowGap)
+      const ds1 = direction ? (arrowH + arrowGap) : -(arrowH + arrowGap)
       const point1 = getXY([startX, startY], k1, ds1)
-      const ds2 = distance >= 0 ? arrowGap : -arrowGap
+      const ds2 = direction ? arrowGap : -arrowGap
       const bottomCenter = getXY([startX, startY], k1, ds2)
       const k2 = -1 / k1
       const baseSideW = 12
@@ -182,7 +122,7 @@ export default class Render {
     drawArrow()
 
     for (let i = 0; i < nums; i++) {
-      const ds = distance >= 0 ? gapCenter * (i + 1) : -gapCenter * (i + 1)
+      const ds = direction ? gapCenter * (i + 1) : -gapCenter * (i + 1)
       const point = getXY([startX, startY], k1, ds)
 
       this.arc(this.ctx, {
@@ -194,7 +134,10 @@ export default class Render {
       })
     }
 
-    return k1
+    return {
+      direction: getDirection(endX - startX, endY - startY),
+      angle: Math.atan(Math.abs(k1))
+    }
   }
 
   lines (ctx, points) {
@@ -226,35 +169,6 @@ export default class Render {
     ctx[type + 'Style'] = color
     ctx.closePath()
     ctx[type]()
-  }
-  // 三次贝塞尔曲线获取坐标点
-  // https://blog.csdn.net/cfan927/article/details/104649623/
-  calculatePointsForBezierCurve (nums, begin, cp1, cp2, end) {
-    const points = []
-    const piece = 1 / nums
-    let t = 0
-
-    for (let i = 0; i <= nums; i++) {
-      points[i] = []
-      points[i][0] =
-        begin.x * Math.pow(1 - t, 3) +
-        3 * cp1.x * t * Math.pow(1 - t, 2) +
-        3 * cp2.x * Math.pow(t, 2) * (1 - t) +
-        end.x * Math.pow(t, 3)
-      points[i][1] =
-        begin.y * Math.pow(1 - t, 3) +
-        3 * cp1.y * t * Math.pow(1 - t, 2) +
-        3 * cp2.y * Math.pow(t, 2) * (1 - t) +
-        end.y * Math.pow(t, 3)
-
-      if (i === nums.length - 1) {
-        t = 1
-      } else {
-        t += piece
-      }
-    }
-
-    return points
   }
 
   polygon (ctx, conf) {

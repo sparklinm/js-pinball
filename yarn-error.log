@@ -1,40 +1,51 @@
 Arguments: 
-  /usr/local/bin/node /home/scutech/.yarn/bin/yarn.js add ESlint -D
+  D:\My development tools\node\node.exe D:\My development tools\node\node_global\node_modules\yarn\bin\yarn.js add chroma.js
 
 PATH: 
-  /home/scutech/.yarn/bin:/home/scutech/.config/yarn/global/node_modules/.bin:/home/scutech/.yarn/bin:/home/scutech/.config/yarn/global/node_modules/.bin:/home/scutech/bin:/home/scutech/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+  C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NGX;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\git-scm\cmd;D:\My development tools\Microsoft VS Code;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NGX;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\git-scm\cmd;D:\My development tools\Microsoft VS Code;D:\My development tools\node\node_global;D:\My development tools\node;;D:\My development tools\Microsoft VS Code\bin
 
 Yarn version: 
-  1.20.0-20191030.2245
+  1.17.3
 
 Node version: 
-  12.13.0
+  12.4.0
 
 Platform: 
-  linux x64
+  win32 x64
 
 Trace: 
-  Error: https://registry.npm.scutech.com/ESlint: no such package available
-      at Request.params.callback [as _callback] (/home/scutech/.yarn/lib/cli.js:66927:18)
-      at Request.self.callback (/home/scutech/.yarn/lib/cli.js:140565:22)
-      at Request.emit (events.js:210:5)
-      at Request.<anonymous> (/home/scutech/.yarn/lib/cli.js:141537:10)
-      at Request.emit (events.js:210:5)
-      at IncomingMessage.<anonymous> (/home/scutech/.yarn/lib/cli.js:141459:12)
-      at Object.onceWrapper (events.js:299:28)
-      at IncomingMessage.emit (events.js:215:7)
-      at endReadableNT (_stream_readable.js:1183:12)
-      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+  Error: https://registry.npm.taobao.org/chroma.js: Not found
+      at Request.params.callback [as _callback] (D:\My development tools\node\node_global\node_modules\yarn\lib\cli.js:66830:18)
+      at Request.self.callback (D:\My development tools\node\node_global\node_modules\yarn\lib\cli.js:140464:22)
+      at Request.emit (events.js:200:13)
+      at Request.<anonymous> (D:\My development tools\node\node_global\node_modules\yarn\lib\cli.js:141436:10)
+      at Request.emit (events.js:200:13)
+      at IncomingMessage.<anonymous> (D:\My development tools\node\node_global\node_modules\yarn\lib\cli.js:141358:12)
+      at Object.onceWrapper (events.js:288:20)
+      at IncomingMessage.emit (events.js:205:15)
+      at endReadableNT (_stream_readable.js:1154:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:9)
 
 npm manifest: 
   {
     "scripts": {
-      "dev": "webpack --mode development"
+      "dev": "webpack --mode development",
+      "serve": "webpack-dev-server --mode development --open"
     },
     "devDependencies": {
+      "babel-eslint": "^10.1.0",
+      "css-loader": "^4.2.1",
+      "eslint": "^7.6.0",
+      "eslint-plugin-html": "^6.0.3",
+      "html-webpack-plugin": "^4.3.0",
+      "style-loader": "^1.2.1",
       "webpack": "^4.44.1",
       "webpack-cli": "^3.3.12",
       "webpack-dev-server": "^3.11.0"
+    },
+    "dependencies": {
+      "number-precision": "^1.5.0",
+      "uuid": "^8.3.0"
     }
   }
 
@@ -46,6 +57,107 @@ Lockfile:
   # yarn lockfile v1
   
   
+  "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4":
+    version "7.10.4"
+    resolved "https://registry.npm.scutech.com/@babel%2fcode-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
+    integrity sha1-Fo2ho26Q2miujUnA8bSMfGJJITo=
+    dependencies:
+      "@babel/highlight" "^7.10.4"
+  
+  "@babel/generator@^7.11.0":
+    version "7.11.0"
+    resolved "https://registry.npm.scutech.com/@babel%2fgenerator/-/generator-7.11.0.tgz#4b90c78d8c12825024568cbe83ee6c9af193585c"
+    integrity sha1-S5DHjYwSglAkVoy+g+5smvGTWFw=
+    dependencies:
+      "@babel/types" "^7.11.0"
+      jsesc "^2.5.1"
+      source-map "^0.5.0"
+  
+  "@babel/helper-function-name@^7.10.4":
+    version "7.10.4"
+    resolved "https://registry.npm.scutech.com/@babel%2fhelper-function-name/-/helper-function-name-7.10.4.tgz#d2d3b20c59ad8c47112fa7d2a94bc09d5ef82f1a"
+    integrity sha1-0tOyDFmtjEcRL6fSqUvAnV74Lxo=
+    dependencies:
+      "@babel/helper-get-function-arity" "^7.10.4"
+      "@babel/template" "^7.10.4"
+      "@babel/types" "^7.10.4"
+  
+  "@babel/helper-get-function-arity@^7.10.4":
+    version "7.10.4"
+    resolved "https://registry.npm.scutech.com/@babel%2fhelper-get-function-arity/-/helper-get-function-arity-7.10.4.tgz#98c1cbea0e2332f33f9a4661b8ce1505b2c19ba2"
+    integrity sha1-mMHL6g4jMvM/mkZhuM4VBbLBm6I=
+    dependencies:
+      "@babel/types" "^7.10.4"
+  
+  "@babel/helper-split-export-declaration@^7.11.0":
+    version "7.11.0"
+    resolved "https://registry.npm.scutech.com/@babel%2fhelper-split-export-declaration/-/helper-split-export-declaration-7.11.0.tgz#f8a491244acf6a676158ac42072911ba83ad099f"
+    integrity sha1-+KSRJErPamdhWKxCBykRuoOtCZ8=
+    dependencies:
+      "@babel/types" "^7.11.0"
+  
+  "@babel/helper-validator-identifier@^7.10.4":
+    version "7.10.4"
+    resolved "https://registry.npm.scutech.com/@babel%2fhelper-validator-identifier/-/helper-validator-identifier-7.10.4.tgz#a78c7a7251e01f616512d31b10adcf52ada5e0d2"
+    integrity sha1-p4x6clHgH2FlEtMbEK3PUq2l4NI=
+  
+  "@babel/highlight@^7.10.4":
+    version "7.10.4"
+    resolved "https://registry.npm.scutech.com/@babel%2fhighlight/-/highlight-7.10.4.tgz#7d1bdfd65753538fabe6c38596cdb76d9ac60143"
+    integrity sha1-fRvf1ldTU4+r5sOFls23bZrGAUM=
+    dependencies:
+      "@babel/helper-validator-identifier" "^7.10.4"
+      chalk "^2.0.0"
+      js-tokens "^4.0.0"
+  
+  "@babel/parser@^7.10.4", "@babel/parser@^7.11.0", "@babel/parser@^7.7.0":
+    version "7.11.3"
+    resolved "https://registry.npm.scutech.com/@babel%2fparser/-/parser-7.11.3.tgz#9e1eae46738bcd08e23e867bab43e7b95299a8f9"
+    integrity sha1-nh6uRnOLzQjiPoZ7q0PnuVKZqPk=
+  
+  "@babel/template@^7.10.4":
+    version "7.10.4"
+    resolved "https://registry.npm.scutech.com/@babel%2ftemplate/-/template-7.10.4.tgz#3251996c4200ebc71d1a8fc405fba940f36ba278"
+    integrity sha1-MlGZbEIA68cdGo/EBfupQPNrong=
+    dependencies:
+      "@babel/code-frame" "^7.10.4"
+      "@babel/parser" "^7.10.4"
+      "@babel/types" "^7.10.4"
+  
+  "@babel/traverse@^7.7.0":
+    version "7.11.0"
+    resolved "https://registry.npm.scutech.com/@babel%2ftraverse/-/traverse-7.11.0.tgz#9b996ce1b98f53f7c3e4175115605d56ed07dd24"
+    integrity sha1-m5ls4bmPU/fD5BdRFWBdVu0H3SQ=
+    dependencies:
+      "@babel/code-frame" "^7.10.4"
+      "@babel/generator" "^7.11.0"
+      "@babel/helper-function-name" "^7.10.4"
+      "@babel/helper-split-export-declaration" "^7.11.0"
+      "@babel/parser" "^7.11.0"
+      "@babel/types" "^7.11.0"
+      debug "^4.1.0"
+      globals "^11.1.0"
+      lodash "^4.17.19"
+  
+  "@babel/types@^7.10.4", "@babel/types@^7.11.0", "@babel/types@^7.7.0":
+    version "7.11.0"
+    resolved "https://registry.npm.scutech.com/@babel%2ftypes/-/types-7.11.0.tgz#2ae6bf1ba9ae8c3c43824e5861269871b206e90d"
+    integrity sha1-Kua/G6mujDxDgk5YYSaYcbIG6Q0=
+    dependencies:
+      "@babel/helper-validator-identifier" "^7.10.4"
+      lodash "^4.17.19"
+      to-fast-properties "^2.0.0"
+  
+  "@types/anymatch@*":
+    version "1.3.1"
+    resolved "https://registry.npm.scutech.com/@types%2fanymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
+    integrity sha1-M2utwb7sudrMOL6izzKt9ieoQho=
+  
+  "@types/color-name@^1.1.1":
+    version "1.1.1"
+    resolved "https://registry.npm.scutech.com/@types%2fcolor-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
+    integrity sha1-HBJhu+qhCoBVu8XYq4S3sq/IRqA=
+  
   "@types/glob@^7.1.1":
     version "7.1.3"
     resolved "https://registry.npm.scutech.com/@types%2fglob/-/glob-7.1.3.tgz#e6ba80f36b7daad2c685acd9266382e68985c183"
@@ -53,6 +165,16 @@ Lockfile:
     dependencies:
       "@types/minimatch" "*"
       "@types/node" "*"
+  
+  "@types/html-minifier-terser@^5.0.0":
+    version "5.1.0"
+    resolved "https://registry.npm.scutech.com/@types%2fhtml-minifier-terser/-/html-minifier-terser-5.1.0.tgz#551a4589b6ee2cc9c1dff08056128aec29b94880"
+    integrity sha1-VRpFibbuLMnB3/CAVhKK7Cm5SIA=
+  
+  "@types/json-schema@^7.0.4":
+    version "7.0.5"
+    resolved "https://registry.npm.scutech.com/@types%2fjson-schema/-/json-schema-7.0.5.tgz#dcce4430e64b443ba8945f0290fb564ad5bac6dd"
+    integrity sha1-3M5EMOZLRDuolF8CkPtWStW6xt0=
   
   "@types/minimatch@*":
     version "3.0.3"
@@ -63,6 +185,44 @@ Lockfile:
     version "14.0.27"
     resolved "https://registry.npm.scutech.com/@types%2fnode/-/node-14.0.27.tgz#a151873af5a5e851b51b3b065c9e63390a9e0eb1"
     integrity sha1-oVGHOvWl6FG1GzsGXJ5jOQqeDrE=
+  
+  "@types/source-list-map@*":
+    version "0.1.2"
+    resolved "https://registry.npm.scutech.com/@types%2fsource-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
+    integrity sha1-AHiDYGP/rxdBI0m7o2QIfgrALsk=
+  
+  "@types/tapable@*", "@types/tapable@^1.0.5":
+    version "1.0.6"
+    resolved "https://registry.npm.scutech.com/@types%2ftapable/-/tapable-1.0.6.tgz#a9ca4b70a18b270ccb2bc0aaafefd1d486b7ea74"
+    integrity sha1-qcpLcKGLJwzLK8Cqr+/R1Ia36nQ=
+  
+  "@types/uglify-js@*":
+    version "3.9.3"
+    resolved "https://registry.npm.scutech.com/@types%2fuglify-js/-/uglify-js-3.9.3.tgz#d94ed608e295bc5424c9600e6b8565407b6b4b6b"
+    integrity sha1-2U7WCOKVvFQkyWAOa4VlQHtrS2s=
+    dependencies:
+      source-map "^0.6.1"
+  
+  "@types/webpack-sources@*":
+    version "1.4.2"
+    resolved "https://registry.npm.scutech.com/@types%2fwebpack-sources/-/webpack-sources-1.4.2.tgz#5d3d4dea04008a779a90135ff96fb5c0c9e6292c"
+    integrity sha1-XT1N6gQAineakBNf+W+1wMnmKSw=
+    dependencies:
+      "@types/node" "*"
+      "@types/source-list-map" "*"
+      source-map "^0.7.3"
+  
+  "@types/webpack@^4.41.8":
+    version "4.41.21"
+    resolved "https://registry.npm.scutech.com/@types%2fwebpack/-/webpack-4.41.21.tgz#cc685b332c33f153bb2f5fc1fa3ac8adeb592dee"
+    integrity sha1-zGhbMywz8VO7L1/B+jrIretZLe4=
+    dependencies:
+      "@types/anymatch" "*"
+      "@types/node" "*"
+      "@types/tapable" "*"
+      "@types/uglify-js" "*"
+      "@types/webpack-sources" "*"
+      source-map "^0.6.0"
   
   "@webassemblyjs/ast@1.9.0":
     version "1.9.0"
@@ -227,10 +387,20 @@ Lockfile:
       mime-types "~2.1.24"
       negotiator "0.6.2"
   
+  acorn-jsx@^5.2.0:
+    version "5.2.0"
+    resolved "https://registry.npm.scutech.com/acorn-jsx/-/acorn-jsx-5.2.0.tgz#4c66069173d6fdd68ed85239fc256226182b2ebe"
+    integrity sha1-TGYGkXPW/daO2FI5/CViJhgrLr4=
+  
   acorn@^6.4.1:
     version "6.4.1"
     resolved "https://registry.npm.scutech.com/acorn/-/acorn-6.4.1.tgz#531e58ba3f51b9dacb9a6646ca4debf5b14ca474"
     integrity sha1-Ux5Yuj9RudrLmmZGyk3r9bFMpHQ=
+  
+  acorn@^7.3.1:
+    version "7.4.0"
+    resolved "https://registry.npm.scutech.com/acorn/-/acorn-7.4.0.tgz#e1ad486e6c54501634c6c397c5c121daa383607c"
+    integrity sha1-4a1IbmxUUBY0xsOXxcEh2qODYHw=
   
   ajv-errors@^1.0.0:
     version "1.0.1"
@@ -242,7 +412,7 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/ajv-keywords/-/ajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
     integrity sha1-MfKdpatuANHC0yms97WSlhTVAU0=
   
-  ajv@^6.1.0, ajv@^6.10.2:
+  ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2:
     version "6.12.3"
     resolved "https://registry.npm.scutech.com/ajv/-/ajv-6.12.3.tgz#18c5af38a111ddeb4f2697bd78d68abc1cabd706"
     integrity sha1-GMWvOKER3etPJpe9eNaKvByr1wY=
@@ -256,6 +426,11 @@ Lockfile:
     version "3.2.4"
     resolved "https://registry.npm.scutech.com/ansi-colors/-/ansi-colors-3.2.4.tgz#e3a3da4bfbae6c86a9c285625de124a234026fbf"
     integrity sha1-46PaS/uubIapwoViXeEkojQCb78=
+  
+  ansi-colors@^4.1.1:
+    version "4.1.1"
+    resolved "https://registry.npm.scutech.com/ansi-colors/-/ansi-colors-4.1.1.tgz#cbb9ae256bf750af1eab344f229aa27fe94ba348"
+    integrity sha512-JoX0apGbHaUJBNl6yF+p6JAFYZ666/hhCGKN5t9QFjbJQKUU/g8MNbFDbvfrgKXvI1QpZplPOnwIo99lX/AAmA==
   
   ansi-html@0.0.7:
     version "0.0.7"
@@ -272,12 +447,25 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/ansi-regex/-/ansi-regex-4.1.0.tgz#8b9f8f08cf1acb843756a839ca8c7e3168c51997"
     integrity sha1-i5+PCM8ay4Q3Vqg5yox+MWjFGZc=
   
+  ansi-regex@^5.0.0:
+    version "5.0.0"
+    resolved "https://registry.npm.scutech.com/ansi-regex/-/ansi-regex-5.0.0.tgz#388539f55179bf39339c81af30a654d69f87cb75"
+    integrity sha1-OIU59VF5vzkznIGvMKZU1p+Hy3U=
+  
   ansi-styles@^3.2.0, ansi-styles@^3.2.1:
     version "3.2.1"
     resolved "https://registry.npm.scutech.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
     integrity sha1-QfuyAkPlCxK+DwS43tvwdSDOhB0=
     dependencies:
       color-convert "^1.9.0"
+  
+  ansi-styles@^4.1.0:
+    version "4.2.1"
+    resolved "https://registry.npm.scutech.com/ansi-styles/-/ansi-styles-4.2.1.tgz#90ae75c424d008d2624c5bf29ead3177ebfcf359"
+    integrity sha1-kK51xCTQCNJiTFvynq0xd+v881k=
+    dependencies:
+      "@types/color-name" "^1.1.1"
+      color-convert "^2.0.1"
   
   anymatch@^2.0.0:
     version "2.0.0"
@@ -299,6 +487,13 @@ Lockfile:
     version "1.2.0"
     resolved "https://registry.npm.scutech.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
     integrity sha1-aALmJk79GMeQobDVF/DyYnvyyUo=
+  
+  argparse@^1.0.7:
+    version "1.0.10"
+    resolved "https://registry.npm.scutech.com/argparse/-/argparse-1.0.10.tgz#bcd6791ea5ae09725e17e5ad988134cd40b3d911"
+    integrity sha1-vNZ5HqWuCXJeF+WtmIE0zUCz2RE=
+    dependencies:
+      sprintf-js "~1.0.2"
   
   arr-diff@^4.0.0:
     version "4.0.0"
@@ -365,6 +560,11 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
     integrity sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c=
   
+  astral-regex@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.npm.scutech.com/astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
+    integrity sha1-bIw/uCfdQ+45GPJ7gngqt2WKb9k=
+  
   async-each@^1.0.1:
     version "1.0.3"
     resolved "https://registry.npm.scutech.com/async-each/-/async-each-1.0.3.tgz#b727dbf87d7651602f06f4d4ac387f47d91b0cbf"
@@ -386,6 +586,18 @@ Lockfile:
     version "2.1.2"
     resolved "https://registry.npm.scutech.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
     integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
+  
+  babel-eslint@^10.1.0:
+    version "10.1.0"
+    resolved "https://registry.npm.scutech.com/babel-eslint/-/babel-eslint-10.1.0.tgz#6968e568a910b78fb3779cdd8b6ac2f479943232"
+    integrity sha1-aWjlaKkQt4+zd5zdi2rC9HmUMjI=
+    dependencies:
+      "@babel/code-frame" "^7.0.0"
+      "@babel/parser" "^7.7.0"
+      "@babel/traverse" "^7.7.0"
+      "@babel/types" "^7.7.0"
+      eslint-visitor-keys "^1.0.0"
+      resolve "^1.12.0"
   
   balanced-match@^1.0.0:
     version "1.0.0"
@@ -479,6 +691,11 @@ Lockfile:
       dns-txt "^2.0.2"
       multicast-dns "^6.0.1"
       multicast-dns-service-types "^1.1.0"
+  
+  boolbase@~1.0.0:
+    version "1.0.0"
+    resolved "https://registry.npm.scutech.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
+    integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
   
   brace-expansion@^1.1.7:
     version "1.1.11"
@@ -652,12 +869,30 @@ Lockfile:
       union-value "^1.0.0"
       unset-value "^1.0.0"
   
+  callsites@^3.0.0:
+    version "3.1.0"
+    resolved "https://registry.npm.scutech.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
+    integrity sha1-s2MKvYlDQy9Us/BRkjjjPNffL3M=
+  
+  camel-case@^4.1.1:
+    version "4.1.1"
+    resolved "https://registry.npm.scutech.com/camel-case/-/camel-case-4.1.1.tgz#1fc41c854f00e2f7d0139dfeba1542d6896fe547"
+    integrity sha1-H8QchU8A4vfQE53+uhVC1olv5Uc=
+    dependencies:
+      pascal-case "^3.1.1"
+      tslib "^1.10.0"
+  
   camelcase@^5.0.0:
     version "5.3.1"
     resolved "https://registry.npm.scutech.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
     integrity sha1-48mzFWnhBoEd8kL3FXJaH0xJQyA=
   
-  chalk@^2.4.2:
+  camelcase@^6.0.0:
+    version "6.0.0"
+    resolved "https://registry.npm.scutech.com/camelcase/-/camelcase-6.0.0.tgz#5259f7c30e35e278f1bdc2a4d91230b37cad981e"
+    integrity sha1-Uln3ww414njxvcKk2RIws3ytmB4=
+  
+  chalk@^2.0.0, chalk@^2.4.2:
     version "2.4.2"
     resolved "https://registry.npm.scutech.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
     integrity sha1-zUJUFnelQzPPVBpJEIwUMrRMlCQ=
@@ -665,6 +900,14 @@ Lockfile:
       ansi-styles "^3.2.1"
       escape-string-regexp "^1.0.5"
       supports-color "^5.3.0"
+  
+  chalk@^4.0.0:
+    version "4.1.0"
+    resolved "https://registry.npm.scutech.com/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
+    integrity sha1-ThSHCmGNni7dl92DRf2dncMVZGo=
+    dependencies:
+      ansi-styles "^4.1.0"
+      supports-color "^7.1.0"
   
   chokidar@^2.1.8:
     version "2.1.8"
@@ -730,6 +973,13 @@ Lockfile:
       isobject "^3.0.0"
       static-extend "^0.1.1"
   
+  clean-css@^4.2.3:
+    version "4.2.3"
+    resolved "https://registry.npm.scutech.com/clean-css/-/clean-css-4.2.3.tgz#507b5de7d97b48ee53d84adb0160ff6216380f78"
+    integrity sha1-UHtd59l7SO5T2ErbAWD/YhY4D3g=
+    dependencies:
+      source-map "~0.6.0"
+  
   cliui@^5.0.0:
     version "5.0.0"
     resolved "https://registry.npm.scutech.com/cliui/-/cliui-5.0.0.tgz#deefcfdb2e800784aa34f46fa08e06851c7bbbc5"
@@ -754,15 +1004,32 @@ Lockfile:
     dependencies:
       color-name "1.1.3"
   
+  color-convert@^2.0.1:
+    version "2.0.1"
+    resolved "https://registry.npm.scutech.com/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
+    integrity sha1-ctOmjVmMm9s68q0ehPIdiWq9TeM=
+    dependencies:
+      color-name "~1.1.4"
+  
   color-name@1.1.3:
     version "1.1.3"
     resolved "https://registry.npm.scutech.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
     integrity sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=
   
+  color-name@~1.1.4:
+    version "1.1.4"
+    resolved "https://registry.npm.scutech.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
+    integrity sha1-wqCah6y95pVD3m9j+jmVyCbFNqI=
+  
   commander@^2.20.0:
     version "2.20.3"
     resolved "https://registry.npm.scutech.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
     integrity sha1-/UhehMA+tIgcIHIrpIA16FMa6zM=
+  
+  commander@^4.1.1:
+    version "4.1.1"
+    resolved "https://registry.npm.scutech.com/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
+    integrity sha1-n9YCvZNilOnp70aj9NaWQESxgGg=
   
   commondir@^1.0.1:
     version "1.0.1"
@@ -910,6 +1177,15 @@ Lockfile:
       shebang-command "^1.2.0"
       which "^1.2.9"
   
+  cross-spawn@^7.0.2:
+    version "7.0.3"
+    resolved "https://registry.npm.scutech.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
+    integrity sha1-9zqFudXUHQRVUcF34ogtSshXKKY=
+    dependencies:
+      path-key "^3.1.0"
+      shebang-command "^2.0.0"
+      which "^2.0.1"
+  
   crypto-browserify@^3.11.0:
     version "3.12.0"
     resolved "https://registry.npm.scutech.com/crypto-browserify/-/crypto-browserify-3.12.0.tgz#396cf9f3137f03e4b8e532c58f698254e00f80ec"
@@ -926,6 +1202,45 @@ Lockfile:
       public-encrypt "^4.0.0"
       randombytes "^2.0.0"
       randomfill "^1.0.3"
+  
+  css-loader@^4.2.1:
+    version "4.2.1"
+    resolved "https://registry.npm.scutech.com/css-loader/-/css-loader-4.2.1.tgz#9f48fd7eae1219d629a3f085ba9a9102ca1141a7"
+    integrity sha1-n0j9fq4SGdYpo/CFupqRAsoRQac=
+    dependencies:
+      camelcase "^6.0.0"
+      cssesc "^3.0.0"
+      icss-utils "^4.1.1"
+      loader-utils "^2.0.0"
+      normalize-path "^3.0.0"
+      postcss "^7.0.32"
+      postcss-modules-extract-imports "^2.0.0"
+      postcss-modules-local-by-default "^3.0.3"
+      postcss-modules-scope "^2.2.0"
+      postcss-modules-values "^3.0.0"
+      postcss-value-parser "^4.1.0"
+      schema-utils "^2.7.0"
+      semver "^7.3.2"
+  
+  css-select@^1.1.0:
+    version "1.2.0"
+    resolved "https://registry.npm.scutech.com/css-select/-/css-select-1.2.0.tgz#2b3a110539c5355f1cd8d314623e870b121ec858"
+    integrity sha1-KzoRBTnFNV8c2NMUYj6HCxIeyFg=
+    dependencies:
+      boolbase "~1.0.0"
+      css-what "2.1"
+      domutils "1.5.1"
+      nth-check "~1.0.1"
+  
+  css-what@2.1:
+    version "2.1.3"
+    resolved "https://registry.npm.scutech.com/css-what/-/css-what-2.1.3.tgz#a6d7604573365fe74686c3f311c56513d88285f2"
+    integrity sha1-ptdgRXM2X+dGhsPzEcVlE9iChfI=
+  
+  cssesc@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.npm.scutech.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee"
+    integrity sha1-N3QZGZA7hoVl4cCep0dEXNGJg+4=
   
   cyclist@^1.0.1:
     version "1.0.1"
@@ -946,7 +1261,7 @@ Lockfile:
     dependencies:
       ms "^2.1.1"
   
-  debug@^4.1.0, debug@^4.1.1:
+  debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
     version "4.1.1"
     resolved "https://registry.npm.scutech.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
     integrity sha1-O3ImAlUQnGtYnO4FDx1RYTlmR5E=
@@ -974,6 +1289,11 @@ Lockfile:
       object-is "^1.0.1"
       object-keys "^1.1.1"
       regexp.prototype.flags "^1.2.0"
+  
+  deep-is@^0.1.3:
+    version "0.1.3"
+    resolved "https://registry.npm.scutech.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
+    integrity sha1-s2nW+128E+7PUk+RsHD+7cNXzzQ=
   
   default-gateway@^4.2.0:
     version "4.2.0"
@@ -1082,10 +1402,89 @@ Lockfile:
     dependencies:
       buffer-indexof "^1.0.0"
   
+  doctrine@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.npm.scutech.com/doctrine/-/doctrine-3.0.0.tgz#addebead72a6574db783639dc87a121773973961"
+    integrity sha1-rd6+rXKmV023g2OdyHoSF3OXOWE=
+    dependencies:
+      esutils "^2.0.2"
+  
+  dom-converter@^0.2:
+    version "0.2.0"
+    resolved "https://registry.npm.scutech.com/dom-converter/-/dom-converter-0.2.0.tgz#6721a9daee2e293682955b6afe416771627bb768"
+    integrity sha1-ZyGp2u4uKTaClVtq/kFncWJ7t2g=
+    dependencies:
+      utila "~0.4"
+  
+  dom-serializer@0, dom-serializer@^0.2.1:
+    version "0.2.2"
+    resolved "https://registry.npm.scutech.com/dom-serializer/-/dom-serializer-0.2.2.tgz#1afb81f533717175d478655debc5e332d9f9bb51"
+    integrity sha1-GvuB9TNxcXXUeGVd68XjMtn5u1E=
+    dependencies:
+      domelementtype "^2.0.1"
+      entities "^2.0.0"
+  
   domain-browser@^1.1.1:
     version "1.2.0"
     resolved "https://registry.npm.scutech.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
     integrity sha1-PTH1AZGmdJ3RN1p/Ui6CPULlTto=
+  
+  domelementtype@1, domelementtype@^1.3.1:
+    version "1.3.1"
+    resolved "https://registry.npm.scutech.com/domelementtype/-/domelementtype-1.3.1.tgz#d048c44b37b0d10a7f2a3d5fee3f4333d790481f"
+    integrity sha1-0EjESzew0Qp/Kj1f7j9DM9eQSB8=
+  
+  domelementtype@^2.0.1:
+    version "2.0.1"
+    resolved "https://registry.npm.scutech.com/domelementtype/-/domelementtype-2.0.1.tgz#1f8bdfe91f5a78063274e803b4bdcedf6e94f94d"
+    integrity sha1-H4vf6R9aeAYydOgDtL3O326U+U0=
+  
+  domhandler@^2.3.0:
+    version "2.4.2"
+    resolved "https://registry.npm.scutech.com/domhandler/-/domhandler-2.4.2.tgz#8805097e933d65e85546f726d60f5eb88b44f803"
+    integrity sha1-iAUJfpM9ZehVRvcm1g9euItE+AM=
+    dependencies:
+      domelementtype "1"
+  
+  domhandler@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.npm.scutech.com/domhandler/-/domhandler-3.0.0.tgz#51cd13efca31da95bbb0c5bee3a48300e333b3e9"
+    integrity sha1-Uc0T78ox2pW7sMW+46SDAOMzs+k=
+    dependencies:
+      domelementtype "^2.0.1"
+  
+  domutils@1.5.1:
+    version "1.5.1"
+    resolved "https://registry.npm.scutech.com/domutils/-/domutils-1.5.1.tgz#dcd8488a26f563d61079e48c9f7b7e32373682cf"
+    integrity sha1-3NhIiib1Y9YQeeSMn3t+Mjc2gs8=
+    dependencies:
+      dom-serializer "0"
+      domelementtype "1"
+  
+  domutils@^1.5.1:
+    version "1.7.0"
+    resolved "https://registry.npm.scutech.com/domutils/-/domutils-1.7.0.tgz#56ea341e834e06e6748af7a1cb25da67ea9f8c2a"
+    integrity sha1-Vuo0HoNOBuZ0ivehyyXaZ+qfjCo=
+    dependencies:
+      dom-serializer "0"
+      domelementtype "1"
+  
+  domutils@^2.0.0:
+    version "2.1.0"
+    resolved "https://registry.npm.scutech.com/domutils/-/domutils-2.1.0.tgz#7ade3201af43703fde154952e3a868eb4b635f16"
+    integrity sha1-et4yAa9DcD/eFUlS46ho60tjXxY=
+    dependencies:
+      dom-serializer "^0.2.1"
+      domelementtype "^2.0.1"
+      domhandler "^3.0.0"
+  
+  dot-case@^3.0.3:
+    version "3.0.3"
+    resolved "https://registry.npm.scutech.com/dot-case/-/dot-case-3.0.3.tgz#21d3b52efaaba2ea5fda875bb1aa8124521cf4aa"
+    integrity sha1-IdO1Lvqroupf2odbsaqBJFIc9Ko=
+    dependencies:
+      no-case "^3.0.3"
+      tslib "^1.10.0"
   
   duplexify@^3.4.2, duplexify@^3.6.0:
     version "3.7.1"
@@ -1146,6 +1545,23 @@ Lockfile:
       memory-fs "^0.5.0"
       tapable "^1.0.0"
   
+  enquirer@^2.3.5:
+    version "2.3.6"
+    resolved "https://registry.npm.scutech.com/enquirer/-/enquirer-2.3.6.tgz#2a7fe5dd634a1e4125a975ec994ff5456dc3734d"
+    integrity sha1-Kn/l3WNKHkElqXXsmU/1RW3Dc00=
+    dependencies:
+      ansi-colors "^4.1.1"
+  
+  entities@^1.1.1:
+    version "1.1.2"
+    resolved "https://registry.npm.scutech.com/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
+    integrity sha1-vfpzUplmTfr9NFKe1PhSKidf6lY=
+  
+  entities@^2.0.0:
+    version "2.0.3"
+    resolved "https://registry.npm.scutech.com/entities/-/entities-2.0.3.tgz#5c487e5742ab93c15abb5da22759b8590ec03b7f"
+    integrity sha1-XEh+V0Krk8Fau12iJ1m4WQ7AO38=
+  
   errno@^0.1.3, errno@~0.1.7:
     version "0.1.7"
     resolved "https://registry.npm.scutech.com/errno/-/errno-0.1.7.tgz#4684d71779ad39af177e3f007996f7c67c852618"
@@ -1189,6 +1605,13 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
     integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
   
+  eslint-plugin-html@^6.0.3:
+    version "6.0.3"
+    resolved "https://registry.npm.scutech.com/eslint-plugin-html/-/eslint-plugin-html-6.0.3.tgz#8d9d2c187d1a48ed78d84f45e29820f102425e51"
+    integrity sha1-jZ0sGH0aSO142E9F4pgg8QJCXlE=
+    dependencies:
+      htmlparser2 "^4.1.0"
+  
   eslint-scope@^4.0.3:
     version "4.0.3"
     resolved "https://registry.npm.scutech.com/eslint-scope/-/eslint-scope-4.0.3.tgz#ca03833310f6889a3264781aa82e63eb9cfe7848"
@@ -1196,6 +1619,89 @@ Lockfile:
     dependencies:
       esrecurse "^4.1.0"
       estraverse "^4.1.1"
+  
+  eslint-scope@^5.1.0:
+    version "5.1.0"
+    resolved "https://registry.npm.scutech.com/eslint-scope/-/eslint-scope-5.1.0.tgz#d0f971dfe59c69e0cada684b23d49dbf82600ce5"
+    integrity sha1-0Plx3+WcaeDK2mhLI9Sdv4JgDOU=
+    dependencies:
+      esrecurse "^4.1.0"
+      estraverse "^4.1.1"
+  
+  eslint-utils@^2.1.0:
+    version "2.1.0"
+    resolved "https://registry.npm.scutech.com/eslint-utils/-/eslint-utils-2.1.0.tgz#d2de5e03424e707dc10c74068ddedae708741b27"
+    integrity sha1-0t5eA0JOcH3BDHQGjd7a5wh0Gyc=
+    dependencies:
+      eslint-visitor-keys "^1.1.0"
+  
+  eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0, eslint-visitor-keys@^1.3.0:
+    version "1.3.0"
+    resolved "https://registry.npm.scutech.com/eslint-visitor-keys/-/eslint-visitor-keys-1.3.0.tgz#30ebd1ef7c2fdff01c3a4f151044af25fab0523e"
+    integrity sha1-MOvR73wv3/AcOk8VEESvJfqwUj4=
+  
+  eslint@^7.6.0:
+    version "7.6.0"
+    resolved "https://registry.npm.scutech.com/eslint/-/eslint-7.6.0.tgz#522d67cfaea09724d96949c70e7a0550614d64d6"
+    integrity sha1-Ui1nz66glyTZaUnHDnoFUGFNZNY=
+    dependencies:
+      "@babel/code-frame" "^7.0.0"
+      ajv "^6.10.0"
+      chalk "^4.0.0"
+      cross-spawn "^7.0.2"
+      debug "^4.0.1"
+      doctrine "^3.0.0"
+      enquirer "^2.3.5"
+      eslint-scope "^5.1.0"
+      eslint-utils "^2.1.0"
+      eslint-visitor-keys "^1.3.0"
+      espree "^7.2.0"
+      esquery "^1.2.0"
+      esutils "^2.0.2"
+      file-entry-cache "^5.0.1"
+      functional-red-black-tree "^1.0.1"
+      glob-parent "^5.0.0"
+      globals "^12.1.0"
+      ignore "^4.0.6"
+      import-fresh "^3.0.0"
+      imurmurhash "^0.1.4"
+      is-glob "^4.0.0"
+      js-yaml "^3.13.1"
+      json-stable-stringify-without-jsonify "^1.0.1"
+      levn "^0.4.1"
+      lodash "^4.17.19"
+      minimatch "^3.0.4"
+      natural-compare "^1.4.0"
+      optionator "^0.9.1"
+      progress "^2.0.0"
+      regexpp "^3.1.0"
+      semver "^7.2.1"
+      strip-ansi "^6.0.0"
+      strip-json-comments "^3.1.0"
+      table "^5.2.3"
+      text-table "^0.2.0"
+      v8-compile-cache "^2.0.3"
+  
+  espree@^7.2.0:
+    version "7.2.0"
+    resolved "https://registry.npm.scutech.com/espree/-/espree-7.2.0.tgz#1c263d5b513dbad0ac30c4991b93ac354e948d69"
+    integrity sha1-HCY9W1E9utCsMMSZG5OsNU6UjWk=
+    dependencies:
+      acorn "^7.3.1"
+      acorn-jsx "^5.2.0"
+      eslint-visitor-keys "^1.3.0"
+  
+  esprima@^4.0.0:
+    version "4.0.1"
+    resolved "https://registry.npm.scutech.com/esprima/-/esprima-4.0.1.tgz#13b04cdb3e6c5d19df91ab6987a8695619b0aa71"
+    integrity sha1-E7BM2z5sXRnfkatph6hpVhmwqnE=
+  
+  esquery@^1.2.0:
+    version "1.3.1"
+    resolved "https://registry.npm.scutech.com/esquery/-/esquery-1.3.1.tgz#b78b5828aa8e214e29fb74c4d5b752e1c033da57"
+    integrity sha1-t4tYKKqOIU4p+3TE1bdS4cAz2lc=
+    dependencies:
+      estraverse "^5.1.0"
   
   esrecurse@^4.1.0:
     version "4.2.1"
@@ -1208,6 +1714,16 @@ Lockfile:
     version "4.3.0"
     resolved "https://registry.npm.scutech.com/estraverse/-/estraverse-4.3.0.tgz#398ad3f3c5a24948be7725e83d11a7de28cdbd1d"
     integrity sha1-OYrT88WiSUi+dyXoPRGn3ijNvR0=
+  
+  estraverse@^5.1.0:
+    version "5.2.0"
+    resolved "https://registry.npm.scutech.com/estraverse/-/estraverse-5.2.0.tgz#307df42547e6cc7324d3cf03c155d5cdb8c53880"
+    integrity sha1-MH30JUfmzHMk088DwVXVzbjFOIA=
+  
+  esutils@^2.0.2:
+    version "2.0.3"
+    resolved "https://registry.npm.scutech.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
+    integrity sha1-dNLrTeC42hKTcRkQ1Qd1ubcQ72Q=
   
   etag@~1.8.1:
     version "1.8.1"
@@ -1347,6 +1863,11 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz#874bf69c6f404c2b5d99c481341399fd55892633"
     integrity sha1-h0v2nG9ATCtdmcSBNBOZ/VWJJjM=
   
+  fast-levenshtein@^2.0.6:
+    version "2.0.6"
+    resolved "https://registry.npm.scutech.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
+    integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
+  
   faye-websocket@^0.10.0:
     version "0.10.0"
     resolved "https://registry.npm.scutech.com/faye-websocket/-/faye-websocket-0.10.0.tgz#4e492f8d04dfb6f89003507f6edbf2d501e7c6f4"
@@ -1365,6 +1886,13 @@ Lockfile:
     version "3.5.2"
     resolved "https://registry.npm.scutech.com/figgy-pudding/-/figgy-pudding-3.5.2.tgz#b4eee8148abb01dcf1d1ac34367d59e12fa61d6e"
     integrity sha1-tO7oFIq7Adzx0aw0Nn1Z4S+mHW4=
+  
+  file-entry-cache@^5.0.1:
+    version "5.0.1"
+    resolved "https://registry.npm.scutech.com/file-entry-cache/-/file-entry-cache-5.0.1.tgz#ca0f6efa6dd3d561333fb14515065c2fafdf439c"
+    integrity sha1-yg9u+m3T1WEzP7FFFQZcL6/fQ5w=
+    dependencies:
+      flat-cache "^2.0.1"
   
   file-uri-to-path@1.0.0:
     version "1.0.0"
@@ -1426,6 +1954,20 @@ Lockfile:
       is-glob "^4.0.0"
       micromatch "^3.0.4"
       resolve-dir "^1.0.1"
+  
+  flat-cache@^2.0.1:
+    version "2.0.1"
+    resolved "https://registry.npm.scutech.com/flat-cache/-/flat-cache-2.0.1.tgz#5d296d6f04bda44a4630a301413bdbc2ec085ec0"
+    integrity sha1-XSltbwS9pEpGMKMBQTvbwuwIXsA=
+    dependencies:
+      flatted "^2.0.0"
+      rimraf "2.6.3"
+      write "1.0.3"
+  
+  flatted@^2.0.0:
+    version "2.0.2"
+    resolved "https://registry.npm.scutech.com/flatted/-/flatted-2.0.2.tgz#4575b21e2bcee7434aa9be662f4b7b5f9c2b5138"
+    integrity sha1-RXWyHivO50NKqb5mL0t7X5wrUTg=
   
   flush-write-stream@^1.0.0:
     version "1.1.1"
@@ -1503,6 +2045,11 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
     integrity sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=
   
+  functional-red-black-tree@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.npm.scutech.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
+    integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
+  
   get-caller-file@^2.0.1:
     version "2.0.5"
     resolved "https://registry.npm.scutech.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
@@ -1528,7 +2075,7 @@ Lockfile:
       is-glob "^3.1.0"
       path-dirname "^1.0.0"
   
-  glob-parent@~5.1.0:
+  glob-parent@^5.0.0, glob-parent@~5.1.0:
     version "5.1.1"
     resolved "https://registry.npm.scutech.com/glob-parent/-/glob-parent-5.1.1.tgz#b6c1ef417c4e5663ea498f1c45afac6916bbc229"
     integrity sha1-tsHvQXxOVmPqSY8cRa+saRa7wik=
@@ -1583,6 +2130,18 @@ Lockfile:
       kind-of "^6.0.2"
       which "^1.3.1"
   
+  globals@^11.1.0:
+    version "11.12.0"
+    resolved "https://registry.npm.scutech.com/globals/-/globals-11.12.0.tgz#ab8795338868a0babd8525758018c2a7eb95c42e"
+    integrity sha1-q4eVM4hooLq9hSV1gBjCp+uVxC4=
+  
+  globals@^12.1.0:
+    version "12.4.0"
+    resolved "https://registry.npm.scutech.com/globals/-/globals-12.4.0.tgz#a18813576a41b00a24a97e7f815918c2e19925f8"
+    integrity sha1-oYgTV2pBsAokqX5/gVkYwuGZJfg=
+    dependencies:
+      type-fest "^0.8.1"
+  
   globby@^6.1.0:
     version "6.1.0"
     resolved "https://registry.npm.scutech.com/globby/-/globby-6.1.0.tgz#f5a6d70e8395e21c858fb0489d64df02424d506c"
@@ -1608,6 +2167,11 @@ Lockfile:
     version "3.0.0"
     resolved "https://registry.npm.scutech.com/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
     integrity sha1-tdRU3CGZriJWmfNGfloH87lVuv0=
+  
+  has-flag@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.npm.scutech.com/has-flag/-/has-flag-4.0.0.tgz#944771fd9c81c81265c4d6941860da06bb59479b"
+    integrity sha1-lEdx/ZyByBJlxNaUGGDaBrtZR5s=
   
   has-symbols@^1.0.0, has-symbols@^1.0.1:
     version "1.0.1"
@@ -1669,6 +2233,11 @@ Lockfile:
       inherits "^2.0.3"
       minimalistic-assert "^1.0.1"
   
+  he@^1.2.0:
+    version "1.2.0"
+    resolved "https://registry.npm.scutech.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
+    integrity sha1-hK5l+n6vsWX922FWauFLrwVmTw8=
+  
   hmac-drbg@^1.0.0:
     version "1.0.1"
     resolved "https://registry.npm.scutech.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -1699,6 +2268,56 @@ Lockfile:
     version "1.3.1"
     resolved "https://registry.npm.scutech.com/html-entities/-/html-entities-1.3.1.tgz#fb9a1a4b5b14c5daba82d3e34c6ae4fe701a0e44"
     integrity sha1-+5oaS1sUxdq6gtPjTGrk/nAaDkQ=
+  
+  html-minifier-terser@^5.0.1:
+    version "5.1.1"
+    resolved "https://registry.npm.scutech.com/html-minifier-terser/-/html-minifier-terser-5.1.1.tgz#922e96f1f3bb60832c2634b79884096389b1f054"
+    integrity sha1-ki6W8fO7YIMsJjS3mIQJY4mx8FQ=
+    dependencies:
+      camel-case "^4.1.1"
+      clean-css "^4.2.3"
+      commander "^4.1.1"
+      he "^1.2.0"
+      param-case "^3.0.3"
+      relateurl "^0.2.7"
+      terser "^4.6.3"
+  
+  html-webpack-plugin@^4.3.0:
+    version "4.3.0"
+    resolved "https://registry.npm.scutech.com/html-webpack-plugin/-/html-webpack-plugin-4.3.0.tgz#53bf8f6d696c4637d5b656d3d9863d89ce8174fd"
+    integrity sha1-U7+PbWlsRjfVtlbT2YY9ic6BdP0=
+    dependencies:
+      "@types/html-minifier-terser" "^5.0.0"
+      "@types/tapable" "^1.0.5"
+      "@types/webpack" "^4.41.8"
+      html-minifier-terser "^5.0.1"
+      loader-utils "^1.2.3"
+      lodash "^4.17.15"
+      pretty-error "^2.1.1"
+      tapable "^1.1.3"
+      util.promisify "1.0.0"
+  
+  htmlparser2@^3.3.0:
+    version "3.10.1"
+    resolved "https://registry.npm.scutech.com/htmlparser2/-/htmlparser2-3.10.1.tgz#bd679dc3f59897b6a34bb10749c855bb53a9392f"
+    integrity sha1-vWedw/WYl7ajS7EHSchVu1OpOS8=
+    dependencies:
+      domelementtype "^1.3.1"
+      domhandler "^2.3.0"
+      domutils "^1.5.1"
+      entities "^1.1.1"
+      inherits "^2.0.1"
+      readable-stream "^3.1.1"
+  
+  htmlparser2@^4.1.0:
+    version "4.1.0"
+    resolved "https://registry.npm.scutech.com/htmlparser2/-/htmlparser2-4.1.0.tgz#9a4ef161f2e4625ebf7dfbe6c0a2f52d18a59e78"
+    integrity sha1-mk7xYfLkYl6/ffvmwKL1LRilnng=
+    dependencies:
+      domelementtype "^2.0.1"
+      domhandler "^3.0.0"
+      domutils "^2.0.0"
+      entities "^2.0.0"
   
   http-deceiver@^1.2.7:
     version "1.2.7"
@@ -1773,6 +2392,13 @@ Lockfile:
     dependencies:
       safer-buffer ">= 2.1.2 < 3"
   
+  icss-utils@^4.0.0, icss-utils@^4.1.1:
+    version "4.1.1"
+    resolved "https://registry.npm.scutech.com/icss-utils/-/icss-utils-4.1.1.tgz#21170b53789ee27447c2f47dd683081403f9a467"
+    integrity sha512-4aFq7wvWyMHKgxsH8QQtGpvbASCf+eM3wPRLI6R+MgAnTCZ6STYsRvttLvRWK0Nfif5piF394St3HeJDaljGPA==
+    dependencies:
+      postcss "^7.0.14"
+  
   ieee754@^1.1.4:
     version "1.1.13"
     resolved "https://registry.npm.scutech.com/ieee754/-/ieee754-1.1.13.tgz#ec168558e95aa181fd87d37f55c32bbcb6708b84"
@@ -1782,6 +2408,19 @@ Lockfile:
     version "0.1.5"
     resolved "https://registry.npm.scutech.com/iferr/-/iferr-0.1.5.tgz#c60eed69e6d8fdb6b3104a1fcbca1c192dc5b501"
     integrity sha1-xg7taebY/bazEEofy8ocGS3FtQE=
+  
+  ignore@^4.0.6:
+    version "4.0.6"
+    resolved "https://registry.npm.scutech.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
+    integrity sha1-dQ49tYYgh7RzfrrIIH/9HvJ7Jfw=
+  
+  import-fresh@^3.0.0:
+    version "3.2.1"
+    resolved "https://registry.npm.scutech.com/import-fresh/-/import-fresh-3.2.1.tgz#633ff618506e793af5ac91bf48b72677e15cbe66"
+    integrity sha1-Yz/2GFBueTr1rJG/SLcmd+FcvmY=
+    dependencies:
+      parent-module "^1.0.0"
+      resolve-from "^4.0.0"
   
   import-local@^2.0.0:
     version "2.0.0"
@@ -1795,6 +2434,11 @@ Lockfile:
     version "0.1.4"
     resolved "https://registry.npm.scutech.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
     integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
+  
+  indexes-of@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.npm.scutech.com/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607"
+    integrity sha1-8w9xbI4r00bHtn0985FVZqfAVgc=
   
   infer-owner@^1.0.3:
     version "1.0.4"
@@ -2067,6 +2711,24 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
     integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
   
+  js-tokens@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.npm.scutech.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
+    integrity sha1-GSA/tZmR35jjoocFDUZHzerzJJk=
+  
+  js-yaml@^3.13.1:
+    version "3.14.0"
+    resolved "https://registry.npm.scutech.com/js-yaml/-/js-yaml-3.14.0.tgz#a7a34170f26a21bb162424d8adacb4113a69e482"
+    integrity sha1-p6NBcPJqIbsWJCTYray0ETpp5II=
+    dependencies:
+      argparse "^1.0.7"
+      esprima "^4.0.0"
+  
+  jsesc@^2.5.1:
+    version "2.5.2"
+    resolved "https://registry.npm.scutech.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
+    integrity sha1-gFZNLkg9rPbo7yCWUKZ98/DCg6Q=
+  
   json-parse-better-errors@^1.0.2:
     version "1.0.2"
     resolved "https://registry.npm.scutech.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
@@ -2076,6 +2738,11 @@ Lockfile:
     version "0.4.1"
     resolved "https://registry.npm.scutech.com/json-schema-traverse/-/json-schema-traverse-0.4.1.tgz#69f6a87d9513ab8bb8fe63bdb0979c448e684660"
     integrity sha1-afaofZUTq4u4/mO9sJecRI5oRmA=
+  
+  json-stable-stringify-without-jsonify@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.npm.scutech.com/json-stable-stringify-without-jsonify/-/json-stable-stringify-without-jsonify-1.0.1.tgz#9db7b59496ad3f3cfef30a75142d2d930ad72651"
+    integrity sha1-nbe1lJatPzz+8wp1FC0tkwrXJlE=
   
   json3@^3.3.2:
     version "3.3.3"
@@ -2088,6 +2755,13 @@ Lockfile:
     integrity sha1-d5+wAYYE+oVOrL9iUhgNg1Q+Pb4=
     dependencies:
       minimist "^1.2.0"
+  
+  json5@^2.1.2:
+    version "2.1.3"
+    resolved "https://registry.npm.scutech.com/json5/-/json5-2.1.3.tgz#c9b0f7fa9233bfe5807fe66fcf3a5617ed597d43"
+    integrity sha1-ybD3+pIzv+WAf+ZvzzpWF+1ZfUM=
+    dependencies:
+      minimist "^1.2.5"
   
   killable@^1.0.1:
     version "1.0.1"
@@ -2118,6 +2792,14 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
     integrity sha1-B8BQNKbDSfoG4k+jWqdttFgM5N0=
   
+  levn@^0.4.1:
+    version "0.4.1"
+    resolved "https://registry.npm.scutech.com/levn/-/levn-0.4.1.tgz#ae4562c007473b932a6200d403268dd2fffc6ade"
+    integrity sha1-rkViwAdHO5MqYgDUAyaN0v/8at4=
+    dependencies:
+      prelude-ls "^1.2.1"
+      type-check "~0.4.0"
+  
   loader-runner@^2.4.0:
     version "2.4.0"
     resolved "https://registry.npm.scutech.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
@@ -2132,6 +2814,15 @@ Lockfile:
       emojis-list "^3.0.0"
       json5 "^1.0.1"
   
+  loader-utils@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.npm.scutech.com/loader-utils/-/loader-utils-2.0.0.tgz#e4cace5b816d425a166b5f097e10cd12b36064b0"
+    integrity sha1-5MrOW4FtQloWa18JfhDNErNgZLA=
+    dependencies:
+      big.js "^5.2.2"
+      emojis-list "^3.0.0"
+      json5 "^2.1.2"
+  
   locate-path@^3.0.0:
     version "3.0.0"
     resolved "https://registry.npm.scutech.com/locate-path/-/locate-path-3.0.0.tgz#dbec3b3ab759758071b58fe59fc41871af21400e"
@@ -2140,7 +2831,7 @@ Lockfile:
       p-locate "^3.0.0"
       path-exists "^3.0.0"
   
-  lodash@^4.17.11, lodash@^4.17.14:
+  lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19:
     version "4.17.19"
     resolved "https://registry.npm.scutech.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
     integrity sha1-5I3e2+MLMyF4PFtDAfvTU7weSks=
@@ -2149,6 +2840,13 @@ Lockfile:
     version "1.6.8"
     resolved "https://registry.npm.scutech.com/loglevel/-/loglevel-1.6.8.tgz#8a25fb75d092230ecd4457270d80b54e28011171"
     integrity sha1-iiX7ddCSIw7NRFcnDYC1TigBEXE=
+  
+  lower-case@^2.0.1:
+    version "2.0.1"
+    resolved "https://registry.npm.scutech.com/lower-case/-/lower-case-2.0.1.tgz#39eeb36e396115cc05e29422eaea9e692c9408c7"
+    integrity sha1-Oe6zbjlhFcwF4pQi6uqeaSyUCMc=
+    dependencies:
+      tslib "^1.10.0"
   
   lru-cache@^5.1.1:
     version "5.1.1"
@@ -2381,6 +3079,11 @@ Lockfile:
       snapdragon "^0.8.1"
       to-regex "^3.0.1"
   
+  natural-compare@^1.4.0:
+    version "1.4.0"
+    resolved "https://registry.npm.scutech.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
+    integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
+  
   negotiator@0.6.2:
     version "0.6.2"
     resolved "https://registry.npm.scutech.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
@@ -2395,6 +3098,14 @@ Lockfile:
     version "1.0.5"
     resolved "https://registry.npm.scutech.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
     integrity sha1-ozeKdpbOfSI+iPybdkvX7xCJ42Y=
+  
+  no-case@^3.0.3:
+    version "3.0.3"
+    resolved "https://registry.npm.scutech.com/no-case/-/no-case-3.0.3.tgz#c21b434c1ffe48b39087e86cfb4d2582e9df18f8"
+    integrity sha1-whtDTB/+SLOQh+hs+00lgunfGPg=
+    dependencies:
+      lower-case "^2.0.1"
+      tslib "^1.10.0"
   
   node-forge@0.9.0:
     version "0.9.0"
@@ -2449,6 +3160,18 @@ Lockfile:
     dependencies:
       path-key "^2.0.0"
   
+  nth-check@~1.0.1:
+    version "1.0.2"
+    resolved "https://registry.npm.scutech.com/nth-check/-/nth-check-1.0.2.tgz#b2bd295c37e3dd58a3bf0700376663ba4d9cf05c"
+    integrity sha1-sr0pXDfj3VijvwcAN2Zjuk2c8Fw=
+    dependencies:
+      boolbase "~1.0.0"
+  
+  number-precision@^1.5.0:
+    version "1.5.0"
+    resolved "https://registry.npm.taobao.org/number-precision/download/number-precision-1.5.0.tgz#eca1e3657cc7de3778987f2d22aa9dea4be238d5"
+    integrity sha1-7KHjZXzH3jd4mH8tIqqd6kviONU=
+  
   object-assign@^4.0.1, object-assign@^4.1.1:
     version "4.1.1"
     resolved "https://registry.npm.scutech.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
@@ -2498,6 +3221,14 @@ Lockfile:
       has-symbols "^1.0.0"
       object-keys "^1.0.11"
   
+  object.getownpropertydescriptors@^2.0.3:
+    version "2.1.0"
+    resolved "https://registry.npm.scutech.com/object.getownpropertydescriptors/-/object.getownpropertydescriptors-2.1.0.tgz#369bf1f9592d8ab89d712dced5cb81c7c5352649"
+    integrity sha1-Npvx+VktiridcS3O1cuBx8U1Jkk=
+    dependencies:
+      define-properties "^1.1.3"
+      es-abstract "^1.17.0-next.1"
+  
   object.pick@^1.3.0:
     version "1.3.0"
     resolved "https://registry.npm.scutech.com/object.pick/-/object.pick-1.3.0.tgz#87a10ac4c1694bd2e1cbf53591a66141fb5dd747"
@@ -2535,6 +3266,18 @@ Lockfile:
     integrity sha1-/HFk+rVtI1kExRw7J9pnWMo7m/w=
     dependencies:
       is-wsl "^1.1.0"
+  
+  optionator@^0.9.1:
+    version "0.9.1"
+    resolved "https://registry.npm.scutech.com/optionator/-/optionator-0.9.1.tgz#4f236a6373dae0566a6d43e1326674f50c291499"
+    integrity sha1-TyNqY3Pa4FZqbUPhMmZ09QwpFJk=
+    dependencies:
+      deep-is "^0.1.3"
+      fast-levenshtein "^2.0.6"
+      levn "^0.4.1"
+      prelude-ls "^1.2.1"
+      type-check "^0.4.0"
+      word-wrap "^1.2.3"
   
   original@^1.0.0:
     version "1.0.2"
@@ -2598,6 +3341,21 @@ Lockfile:
       inherits "^2.0.3"
       readable-stream "^2.1.5"
   
+  param-case@^3.0.3:
+    version "3.0.3"
+    resolved "https://registry.npm.scutech.com/param-case/-/param-case-3.0.3.tgz#4be41f8399eff621c56eebb829a5e451d9801238"
+    integrity sha1-S+Qfg5nv9iHFbuu4KaXkUdmAEjg=
+    dependencies:
+      dot-case "^3.0.3"
+      tslib "^1.10.0"
+  
+  parent-module@^1.0.0:
+    version "1.0.1"
+    resolved "https://registry.npm.scutech.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
+    integrity sha1-aR0nCeeMefrjoVZiJFLQB2LKqqI=
+    dependencies:
+      callsites "^3.0.0"
+  
   parse-asn1@^5.0.0, parse-asn1@^5.1.5:
     version "5.1.6"
     resolved "https://registry.npm.scutech.com/parse-asn1/-/parse-asn1-5.1.6.tgz#385080a3ec13cb62a62d39409cb3e88844cdaed4"
@@ -2618,6 +3376,14 @@ Lockfile:
     version "1.3.3"
     resolved "https://registry.npm.scutech.com/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
     integrity sha1-naGee+6NEt/wUT7Vt2lXeTvC6NQ=
+  
+  pascal-case@^3.1.1:
+    version "3.1.1"
+    resolved "https://registry.npm.scutech.com/pascal-case/-/pascal-case-3.1.1.tgz#5ac1975133ed619281e88920973d2cd1f279de5f"
+    integrity sha1-WsGXUTPtYZKB6Ikglz0s0fJ53l8=
+    dependencies:
+      no-case "^3.0.3"
+      tslib "^1.10.0"
   
   pascalcase@^0.1.1:
     version "0.1.1"
@@ -2653,6 +3419,16 @@ Lockfile:
     version "2.0.1"
     resolved "https://registry.npm.scutech.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
     integrity sha1-QRyttXTFoUDTpLGRDUDYDMn0C0A=
+  
+  path-key@^3.1.0:
+    version "3.1.1"
+    resolved "https://registry.npm.scutech.com/path-key/-/path-key-3.1.1.tgz#581f6ade658cbba65a0d3380de7753295054f375"
+    integrity sha1-WB9q3mWMu6ZaDTOA3ndTKVBU83U=
+  
+  path-parse@^1.0.6:
+    version "1.0.6"
+    resolved "https://registry.npm.scutech.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
+    integrity sha1-1i27VnlAXXLEc37FhgDp3c8G0kw=
   
   path-to-regexp@0.1.7:
     version "0.1.7"
@@ -2718,6 +3494,75 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
     integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
   
+  postcss-modules-extract-imports@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.npm.scutech.com/postcss-modules-extract-imports/-/postcss-modules-extract-imports-2.0.0.tgz#818719a1ae1da325f9832446b01136eeb493cd7e"
+    integrity sha1-gYcZoa4doyX5gyRGsBE27rSTzX4=
+    dependencies:
+      postcss "^7.0.5"
+  
+  postcss-modules-local-by-default@^3.0.3:
+    version "3.0.3"
+    resolved "https://registry.npm.scutech.com/postcss-modules-local-by-default/-/postcss-modules-local-by-default-3.0.3.tgz#bb14e0cc78279d504dbdcbfd7e0ca28993ffbbb0"
+    integrity sha1-uxTgzHgnnVBNvcv9fgyiiZP/u7A=
+    dependencies:
+      icss-utils "^4.1.1"
+      postcss "^7.0.32"
+      postcss-selector-parser "^6.0.2"
+      postcss-value-parser "^4.1.0"
+  
+  postcss-modules-scope@^2.2.0:
+    version "2.2.0"
+    resolved "https://registry.npm.scutech.com/postcss-modules-scope/-/postcss-modules-scope-2.2.0.tgz#385cae013cc7743f5a7d7602d1073a89eaae62ee"
+    integrity sha1-OFyuATzHdD9afXYC0Qc6iequYu4=
+    dependencies:
+      postcss "^7.0.6"
+      postcss-selector-parser "^6.0.0"
+  
+  postcss-modules-values@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.npm.scutech.com/postcss-modules-values/-/postcss-modules-values-3.0.0.tgz#5b5000d6ebae29b4255301b4a3a54574423e7f10"
+    integrity sha1-W1AA1uuuKbQlUwG0o6VFdEI+fxA=
+    dependencies:
+      icss-utils "^4.0.0"
+      postcss "^7.0.6"
+  
+  postcss-selector-parser@^6.0.0, postcss-selector-parser@^6.0.2:
+    version "6.0.2"
+    resolved "https://registry.npm.scutech.com/postcss-selector-parser/-/postcss-selector-parser-6.0.2.tgz#934cf799d016c83411859e09dcecade01286ec5c"
+    integrity sha1-k0z3mdAWyDQRhZ4J3Oyt4BKG7Fw=
+    dependencies:
+      cssesc "^3.0.0"
+      indexes-of "^1.0.1"
+      uniq "^1.0.1"
+  
+  postcss-value-parser@^4.1.0:
+    version "4.1.0"
+    resolved "https://registry.npm.scutech.com/postcss-value-parser/-/postcss-value-parser-4.1.0.tgz#443f6a20ced6481a2bda4fa8532a6e55d789a2cb"
+    integrity sha1-RD9qIM7WSBor2k+oUypuVdeJoss=
+  
+  postcss@^7.0.14, postcss@^7.0.32, postcss@^7.0.5, postcss@^7.0.6:
+    version "7.0.32"
+    resolved "https://registry.npm.scutech.com/postcss/-/postcss-7.0.32.tgz#4310d6ee347053da3433db2be492883d62cec59d"
+    integrity sha1-QxDW7jRwU9o0M9sr5JKIPWLOxZ0=
+    dependencies:
+      chalk "^2.4.2"
+      source-map "^0.6.1"
+      supports-color "^6.1.0"
+  
+  prelude-ls@^1.2.1:
+    version "1.2.1"
+    resolved "https://registry.npm.scutech.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
+    integrity sha1-3rxkidem5rDnYRiIzsiAM30xY5Y=
+  
+  pretty-error@^2.1.1:
+    version "2.1.1"
+    resolved "https://registry.npm.scutech.com/pretty-error/-/pretty-error-2.1.1.tgz#5f4f87c8f91e5ae3f3ba87ab4cf5e03b1a17f1a3"
+    integrity sha1-X0+HyPkeWuPzuoerTPXgOxoX8aM=
+    dependencies:
+      renderkid "^2.0.1"
+      utila "~0.4"
+  
   process-nextick-args@~2.0.0:
     version "2.0.1"
     resolved "https://registry.npm.scutech.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -2727,6 +3572,11 @@ Lockfile:
     version "0.11.10"
     resolved "https://registry.npm.scutech.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
     integrity sha1-czIwDoQBYb2j5podHZGn1LwW8YI=
+  
+  progress@^2.0.0:
+    version "2.0.3"
+    resolved "https://registry.npm.scutech.com/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
+    integrity sha1-foz42PW48jnBvGi+tOt4Vn1XLvg=
   
   promise-inflight@^1.0.1:
     version "1.0.1"
@@ -2861,7 +3711,7 @@ Lockfile:
       string_decoder "~1.1.1"
       util-deprecate "~1.0.1"
   
-  readable-stream@^3.0.6, readable-stream@^3.6.0:
+  readable-stream@^3.0.6, readable-stream@^3.1.1, readable-stream@^3.6.0:
     version "3.6.0"
     resolved "https://registry.npm.scutech.com/readable-stream/-/readable-stream-3.6.0.tgz#337bbda3adc0706bd3e024426a286d4b4b2c9198"
     integrity sha1-M3u9o63AcGvT4CRCaihtS0sskZg=
@@ -2902,10 +3752,31 @@ Lockfile:
       define-properties "^1.1.3"
       es-abstract "^1.17.0-next.1"
   
+  regexpp@^3.1.0:
+    version "3.1.0"
+    resolved "https://registry.npm.scutech.com/regexpp/-/regexpp-3.1.0.tgz#206d0ad0a5648cffbdb8ae46438f3dc51c9f78e2"
+    integrity sha1-IG0K0KVkjP+9uK5GQ489xRyfeOI=
+  
+  relateurl@^0.2.7:
+    version "0.2.7"
+    resolved "https://registry.npm.scutech.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
+    integrity sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=
+  
   remove-trailing-separator@^1.0.1:
     version "1.1.0"
     resolved "https://registry.npm.scutech.com/remove-trailing-separator/-/remove-trailing-separator-1.1.0.tgz#c24bce2a283adad5bc3f58e0d48249b92379d8ef"
     integrity sha1-wkvOKig62tW8P1jg1IJJuSN52O8=
+  
+  renderkid@^2.0.1:
+    version "2.0.3"
+    resolved "https://registry.npm.scutech.com/renderkid/-/renderkid-2.0.3.tgz#380179c2ff5ae1365c522bf2fcfcff01c5b74149"
+    integrity sha1-OAF5wv9a4TZcUivy/Pz/AcW3QUk=
+    dependencies:
+      css-select "^1.1.0"
+      dom-converter "^0.2"
+      htmlparser2 "^3.3.0"
+      strip-ansi "^3.0.0"
+      utila "^0.4.0"
   
   repeat-element@^1.1.2:
     version "1.1.3"
@@ -2952,10 +3823,22 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/resolve-from/-/resolve-from-3.0.0.tgz#b22c7af7d9d6881bc8b6e653335eebcb0a188748"
     integrity sha1-six699nWiBvItuZTM17rywoYh0g=
   
+  resolve-from@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.npm.scutech.com/resolve-from/-/resolve-from-4.0.0.tgz#4abcd852ad32dd7baabfe9b40e00a36db5f392e6"
+    integrity sha1-SrzYUq0y3Xuqv+m0DgCjbbXzkuY=
+  
   resolve-url@^0.2.1:
     version "0.2.1"
     resolved "https://registry.npm.scutech.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
     integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
+  
+  resolve@^1.12.0:
+    version "1.17.0"
+    resolved "https://registry.npm.scutech.com/resolve/-/resolve-1.17.0.tgz#b25941b54968231cc2d1bb76a79cb7f2c0bf8444"
+    integrity sha1-sllBtUloIxzC0bt2p5y38sC/hEQ=
+    dependencies:
+      path-parse "^1.0.6"
   
   ret@~0.1.10:
     version "0.1.15"
@@ -2966,6 +3849,13 @@ Lockfile:
     version "0.12.0"
     resolved "https://registry.npm.scutech.com/retry/-/retry-0.12.0.tgz#1b42a6266a21f07421d1b0b54b7dc167b01c013b"
     integrity sha1-G0KmJmoh8HQh0bC1S33BZ7AcATs=
+  
+  rimraf@2.6.3:
+    version "2.6.3"
+    resolved "https://registry.npm.scutech.com/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
+    integrity sha1-stEE/g2Psnz54KHNqCYt04M8bKs=
+    dependencies:
+      glob "^7.1.3"
   
   rimraf@^2.5.4, rimraf@^2.6.3:
     version "2.7.1"
@@ -3020,6 +3910,15 @@ Lockfile:
       ajv-errors "^1.0.0"
       ajv-keywords "^3.1.0"
   
+  schema-utils@^2.6.6, schema-utils@^2.7.0:
+    version "2.7.0"
+    resolved "https://registry.npm.scutech.com/schema-utils/-/schema-utils-2.7.0.tgz#17151f76d8eae67fbbf77960c33c676ad9f4efc7"
+    integrity sha1-FxUfdtjq5n+793lgwzxnatn078c=
+    dependencies:
+      "@types/json-schema" "^7.0.4"
+      ajv "^6.12.2"
+      ajv-keywords "^3.4.1"
+  
   select-hose@^2.0.0:
     version "2.0.0"
     resolved "https://registry.npm.scutech.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
@@ -3041,6 +3940,11 @@ Lockfile:
     version "6.3.0"
     resolved "https://registry.npm.scutech.com/semver/-/semver-6.3.0.tgz#ee0a64c8af5e8ceea67687b133761e1becbd1d3d"
     integrity sha1-7gpkyK9ejO6mdoexM3YeG+y9HT0=
+  
+  semver@^7.2.1, semver@^7.3.2:
+    version "7.3.2"
+    resolved "https://registry.npm.scutech.com/semver/-/semver-7.3.2.tgz#604962b052b81ed0786aae84389ffba70ffd3938"
+    integrity sha1-YElisFK4HtB4aq6EOJ/7pw/9OTg=
   
   send@0.17.1:
     version "0.17.1"
@@ -3136,15 +4040,36 @@ Lockfile:
     dependencies:
       shebang-regex "^1.0.0"
   
+  shebang-command@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.npm.scutech.com/shebang-command/-/shebang-command-2.0.0.tgz#ccd0af4f8835fbdc265b82461aaf0c36663f34ea"
+    integrity sha1-zNCvT4g1+9wmW4JGGq8MNmY/NOo=
+    dependencies:
+      shebang-regex "^3.0.0"
+  
   shebang-regex@^1.0.0:
     version "1.0.0"
     resolved "https://registry.npm.scutech.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
     integrity sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
   
+  shebang-regex@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.npm.scutech.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
+    integrity sha1-rhbxZE2HPsrYQ7AwexQzYtTEIXI=
+  
   signal-exit@^3.0.0:
     version "3.0.3"
     resolved "https://registry.npm.scutech.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
     integrity sha1-oUEMLt2PB3sItOJTyOrPyvBXRhw=
+  
+  slice-ansi@^2.1.0:
+    version "2.1.0"
+    resolved "https://registry.npm.scutech.com/slice-ansi/-/slice-ansi-2.1.0.tgz#cacd7693461a637a5788d92a7dd4fba068e81636"
+    integrity sha1-ys12k0YaY3pXiNkqfdT7oGjoFjY=
+    dependencies:
+      ansi-styles "^3.2.0"
+      astral-regex "^1.0.0"
+      is-fullwidth-code-point "^2.0.0"
   
   snapdragon-node@^2.0.1:
     version "2.1.1"
@@ -3226,15 +4151,20 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/source-map-url/-/source-map-url-0.4.0.tgz#3e935d7ddd73631b97659956d55128e87b5084a3"
     integrity sha1-PpNdfd1zYxuXZZlW1VEo6HtQhKM=
   
-  source-map@^0.5.6:
+  source-map@^0.5.0, source-map@^0.5.6:
     version "0.5.7"
     resolved "https://registry.npm.scutech.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
     integrity sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=
   
-  source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.1:
+  source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
     version "0.6.1"
     resolved "https://registry.npm.scutech.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
     integrity sha1-dHIq8y6WFOnCh6jQu95IteLxomM=
+  
+  source-map@^0.7.3:
+    version "0.7.3"
+    resolved "https://registry.npm.scutech.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
+    integrity sha1-UwL4FpAxc1ImVECS5kmB91F1A4M=
   
   spdy-transport@^3.0.0:
     version "3.0.0"
@@ -3265,6 +4195,11 @@ Lockfile:
     integrity sha1-fLCd2jqGWFcFxks5pkZgOGguj+I=
     dependencies:
       extend-shallow "^3.0.0"
+  
+  sprintf-js@~1.0.2:
+    version "1.0.3"
+    resolved "https://registry.npm.scutech.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
+    integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
   
   ssri@^6.0.1:
     version "6.0.1"
@@ -3357,7 +4292,7 @@ Lockfile:
     dependencies:
       safe-buffer "~5.1.0"
   
-  strip-ansi@^3.0.1:
+  strip-ansi@^3.0.0, strip-ansi@^3.0.1:
     version "3.0.1"
     resolved "https://registry.npm.scutech.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
     integrity sha1-ajhfuIU9lS1f8F0Oiq+UJ43GPc8=
@@ -3371,10 +4306,30 @@ Lockfile:
     dependencies:
       ansi-regex "^4.1.0"
   
+  strip-ansi@^6.0.0:
+    version "6.0.0"
+    resolved "https://registry.npm.scutech.com/strip-ansi/-/strip-ansi-6.0.0.tgz#0b1571dd7669ccd4f3e06e14ef1eed26225ae532"
+    integrity sha1-CxVx3XZpzNTz4G4U7x7tJiJa5TI=
+    dependencies:
+      ansi-regex "^5.0.0"
+  
   strip-eof@^1.0.0:
     version "1.0.0"
     resolved "https://registry.npm.scutech.com/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
     integrity sha1-u0P/VZim6wXYm1n80SnJgzE2Br8=
+  
+  strip-json-comments@^3.1.0:
+    version "3.1.1"
+    resolved "https://registry.npm.scutech.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
+    integrity sha1-MfEoGzgyYwQ0gxwxDAHMzajL4AY=
+  
+  style-loader@^1.2.1:
+    version "1.2.1"
+    resolved "https://registry.npm.scutech.com/style-loader/-/style-loader-1.2.1.tgz#c5cbbfbf1170d076cfdd86e0109c5bba114baa1a"
+    integrity sha1-xcu/vxFw0HbP3YbgEJxbuhFLqho=
+    dependencies:
+      loader-utils "^2.0.0"
+      schema-utils "^2.6.6"
   
   supports-color@^5.3.0:
     version "5.5.0"
@@ -3389,6 +4344,23 @@ Lockfile:
     integrity sha1-B2Srxpxj1ayELdSGfo0CXogN+PM=
     dependencies:
       has-flag "^3.0.0"
+  
+  supports-color@^7.1.0:
+    version "7.1.0"
+    resolved "https://registry.npm.scutech.com/supports-color/-/supports-color-7.1.0.tgz#68e32591df73e25ad1c4b49108a2ec507962bfd1"
+    integrity sha1-aOMlkd9z4lrRxLSRCKLsUHliv9E=
+    dependencies:
+      has-flag "^4.0.0"
+  
+  table@^5.2.3:
+    version "5.4.6"
+    resolved "https://registry.npm.scutech.com/table/-/table-5.4.6.tgz#1292d19500ce3f86053b05f0e8e7e4a3bb21079e"
+    integrity sha1-EpLRlQDOP4YFOwXw6Ofko7shB54=
+    dependencies:
+      ajv "^6.10.2"
+      lodash "^4.17.14"
+      slice-ansi "^2.1.0"
+      string-width "^3.0.0"
   
   tapable@^1.0.0, tapable@^1.1.3:
     version "1.1.3"
@@ -3410,7 +4382,7 @@ Lockfile:
       webpack-sources "^1.4.0"
       worker-farm "^1.7.0"
   
-  terser@^4.1.2:
+  terser@^4.1.2, terser@^4.6.3:
     version "4.8.0"
     resolved "https://registry.npm.scutech.com/terser/-/terser-4.8.0.tgz#63056343d7c70bb29f3af665865a46fe03a0df17"
     integrity sha1-YwVjQ9fHC7KfOvZlhlpG/gOg3xc=
@@ -3418,6 +4390,11 @@ Lockfile:
       commander "^2.20.0"
       source-map "~0.6.1"
       source-map-support "~0.5.12"
+  
+  text-table@^0.2.0:
+    version "0.2.0"
+    resolved "https://registry.npm.scutech.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
+    integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
   
   through2@^2.0.0:
     version "2.0.5"
@@ -3443,6 +4420,11 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.npm.scutech.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
     integrity sha1-fSKbH8xjfkZsoIEYCDanqr/4P0M=
+  
+  to-fast-properties@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.npm.scutech.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
+    integrity sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
   
   to-object-path@^0.3.0:
     version "0.3.0"
@@ -3481,7 +4463,7 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
     integrity sha1-fhvjRw8ed5SLxD2Uo8j013UrpVM=
   
-  tslib@^1.9.0:
+  tslib@^1.10.0, tslib@^1.9.0:
     version "1.13.0"
     resolved "https://registry.npm.scutech.com/tslib/-/tslib-1.13.0.tgz#c881e13cc7015894ed914862d276436fa9a47043"
     integrity sha1-yIHhPMcBWJTtkUhi0nZDb6mkcEM=
@@ -3490,6 +4472,18 @@ Lockfile:
     version "0.0.0"
     resolved "https://registry.npm.scutech.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
     integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
+  
+  type-check@^0.4.0, type-check@~0.4.0:
+    version "0.4.0"
+    resolved "https://registry.npm.scutech.com/type-check/-/type-check-0.4.0.tgz#07b8203bfa7056c0657050e3ccd2c37730bab8f1"
+    integrity sha1-B7ggO/pwVsBlcFDjzNLDdzC6uPE=
+    dependencies:
+      prelude-ls "^1.2.1"
+  
+  type-fest@^0.8.1:
+    version "0.8.1"
+    resolved "https://registry.npm.scutech.com/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
+    integrity sha1-CeJJ696FHTseSNJ8EFREZn8XuD0=
   
   type-is@~1.6.17, type-is@~1.6.18:
     version "1.6.18"
@@ -3513,6 +4507,11 @@ Lockfile:
       get-value "^2.0.6"
       is-extendable "^0.1.1"
       set-value "^2.0.1"
+  
+  uniq@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.npm.scutech.com/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
+    integrity sha1-sxxa6CVIRKOoKBVBzisEuGWnNP8=
   
   unique-filename@^1.1.1:
     version "1.1.1"
@@ -3584,6 +4583,14 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
     integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
   
+  util.promisify@1.0.0:
+    version "1.0.0"
+    resolved "https://registry.npm.scutech.com/util.promisify/-/util.promisify-1.0.0.tgz#440f7165a459c9a16dc145eb8e72f35687097030"
+    integrity sha1-RA9xZaRZyaFtwUXrjnLzVocJcDA=
+    dependencies:
+      define-properties "^1.1.2"
+      object.getownpropertydescriptors "^2.0.3"
+  
   util@0.10.3:
     version "0.10.3"
     resolved "https://registry.npm.scutech.com/util/-/util-0.10.3.tgz#7afb1afe50805246489e3db7fe0ed379336ac0f9"
@@ -3598,6 +4605,11 @@ Lockfile:
     dependencies:
       inherits "2.0.3"
   
+  utila@^0.4.0, utila@~0.4:
+    version "0.4.0"
+    resolved "https://registry.npm.scutech.com/utila/-/utila-0.4.0.tgz#8a16a05d445657a3aea5eecc5b12a4fa5379772c"
+    integrity sha1-ihagXURWV6Oupe7MWxKk+lN5dyw=
+  
   utils-merge@1.0.1:
     version "1.0.1"
     resolved "https://registry.npm.scutech.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
@@ -3608,7 +4620,12 @@ Lockfile:
     resolved "https://registry.npm.scutech.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
     integrity sha1-sj5DWK+oogL+ehAK8fX4g/AgB+4=
   
-  v8-compile-cache@^2.1.1:
+  uuid@^8.3.0:
+    version "8.3.0"
+    resolved "https://registry.npm.scutech.com/uuid/-/uuid-8.3.0.tgz#ab738085ca22dc9a8c92725e459b1d507df5d6ea"
+    integrity sha1-q3OAhcoi3JqMknJeRZsdUH311uo=
+  
+  v8-compile-cache@^2.0.3, v8-compile-cache@^2.1.1:
     version "2.1.1"
     resolved "https://registry.npm.scutech.com/v8-compile-cache/-/v8-compile-cache-2.1.1.tgz#54bc3cdd43317bca91e35dcaf305b1a7237de745"
     integrity sha1-VLw83UMxe8qR413K8wWxpyN950U=
@@ -3793,6 +4810,18 @@ Lockfile:
     dependencies:
       isexe "^2.0.0"
   
+  which@^2.0.1:
+    version "2.0.2"
+    resolved "https://registry.npm.scutech.com/which/-/which-2.0.2.tgz#7c6a8dd0a636a0327e10b59c9286eee93f3f51b1"
+    integrity sha1-fGqN0KY2oDJ+ELWckobu6T8/UbE=
+    dependencies:
+      isexe "^2.0.0"
+  
+  word-wrap@^1.2.3:
+    version "1.2.3"
+    resolved "https://registry.npm.scutech.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
+    integrity sha1-YQY29rH3A4kb00dxzLF/uTtHB5w=
+  
   worker-farm@^1.7.0:
     version "1.7.0"
     resolved "https://registry.npm.scutech.com/worker-farm/-/worker-farm-1.7.0.tgz#26a94c5391bbca926152002f69b84a4bf772e5a8"
@@ -3813,6 +4842,13 @@ Lockfile:
     version "1.0.2"
     resolved "https://registry.npm.scutech.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
     integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
+  
+  write@1.0.3:
+    version "1.0.3"
+    resolved "https://registry.npm.scutech.com/write/-/write-1.0.3.tgz#0800e14523b923a387e415123c865616aae0f5c3"
+    integrity sha1-CADhRSO5I6OH5BUSPIZWFqrg9cM=
+    dependencies:
+      mkdirp "^0.5.1"
   
   ws@^6.2.1:
     version "6.2.1"
