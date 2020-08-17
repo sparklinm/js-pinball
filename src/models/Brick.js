@@ -12,7 +12,7 @@ export default class Brick {
     Object.assign(this, {
       sides: this._generateSides(),
       weight: this._generateWeight(),
-      size: 40,
+      size: 26,
       y: 100,
       x: 100
     }, attrs)
@@ -30,6 +30,108 @@ export default class Brick {
     return this._y
   }
 
+  set weight (value) {
+    this._weight = value
+    this.generateColor()
+  }
+
+  get weight () {
+    return this._weight
+  }
+
+  breaking (fn) {
+    cancelAnimationFrame(this.shakingTimer)
+    this.status = 'breaking'
+    const nums = 15
+    const pieces = []
+    const min = -30
+    const max = 30
+    const minSize = 3
+    const maxSize = 8
+
+    for (let i = 0; i < nums; i++) {
+      const r = Math.floor(Math.random() * (maxSize - minSize) + minSize)
+      const x = Math.random() * (max - min) + min + this.x
+      const y = Math.random() * (max - min) + min + this.y
+
+      pieces.push(new Brick({
+        sides: this.sides,
+        weight: '',
+        size: r,
+        x: x,
+        y: y,
+        rotate: Math.random() * 2 * Math.PI,
+        scale: 1,
+        alpha: 0.8
+      }))
+    }
+
+    this.pieces = pieces
+
+
+    let times = 300
+    let timer = null
+    const doing = () => {
+      for (let i = 0; i < pieces.length; i++) {
+        pieces[i].y += 1
+        pieces[i].rotate += 5 * Math.PI / 180
+        pieces[i].scale -= 1 / times
+        pieces[i].alpha -= 0.8 / times
+      }
+
+      times--
+
+      timer = requestAnimationFrame(() => {
+        doing()
+      })
+
+      if (!times) {
+        cancelAnimationFrame(timer)
+        fn()
+        this.status = 'none'
+      }
+    }
+
+    doing()
+
+  }
+
+  shaking () {
+    if (this.status === 'shaking') {
+      return
+    }
+    this.status = 'shaking'
+    // const points = [this.x, this.y]
+    let times = 6
+
+    this.shakingTimer = null
+
+    const doing = () => {
+
+      const isOdd = times % 2 === 0
+
+      if (isOdd) {
+        this.x -= 2
+        this.y -= 2
+      } else {
+        this.x += 2
+        this.y += 2
+      }
+
+      this.shakingTimer = requestAnimationFrame(() => {
+        doing()
+      })
+
+      times--
+      if (!times) {
+        cancelAnimationFrame(this.shakingTimer)
+        this.status = 'none'
+      }
+    }
+
+    doing()
+  }
+
   _generateSides () {
     const min = 3
     const max = 6
@@ -43,6 +145,7 @@ export default class Brick {
   }
 
   generateColor () {
+
     const weight = this.weight - 1
     const colors = {
       1: '#FCFF00',
@@ -52,8 +155,17 @@ export default class Brick {
       5: '#9966ff'
     }
 
-    const index = Math.floor(weight / 6) + 1
-    const ratio = weight % 6 * 0.3
+    let index = 0
+    let ratio = 0
+
+    if (weight > 30) {
+      index = 5
+      ratio = 2
+    } else {
+      index = Math.floor(weight / 6) + 1 || 1
+      ratio = weight % 6 * 0.3
+    }
+
 
     return chroma(colors[index]).brighten(1 - ratio)
   }

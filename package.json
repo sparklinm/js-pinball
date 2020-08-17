@@ -15,6 +15,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@flatten-js/core": "^1.2.10",
     "chroma-js": "^2.1.0",
     "number-precision": "^1.5.0",
     "uuid": "^8.3.0"

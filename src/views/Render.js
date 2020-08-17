@@ -52,7 +52,10 @@ export default class Render {
       y: attrs.y,
       r: attrs.size,
       num: attrs.sides,
-      fillStyle: attrs.color
+      fillStyle: attrs.color,
+      rotate: attrs.rotate,
+      scale: attrs.scale,
+      alpha: attrs.alpha
     })
     this.ctx.font = '600 16px -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
     this.ctx.fillStyle = '#000'
@@ -181,18 +184,30 @@ export default class Render {
     const fillStyle = conf && conf.fillStyle
     const points = [[]]
 
+    ctx.save()
+    ctx.translate(x, y)
+    if (conf.rotate) {
+      ctx.rotate(conf.rotate)
+    }
+    if (conf.alpha) {
+      ctx.globalAlpha = conf.alpha
+    }
+    if (conf.scale) {
+      ctx.scale(conf.scale, conf.scale)
+    }
+
     // 开始路径
     ctx.beginPath()
-    const startX = x + r * Math.cos((2 * Math.PI * 0) / num)
-    const startY = y + r * Math.sin((2 * Math.PI * 0) / num)
+    const startX = r * Math.cos((2 * Math.PI * 0) / num)
+    const startY = r * Math.sin((2 * Math.PI * 0) / num)
 
     points[0][0] = startX
     points[0][1] = startY
 
     ctx.moveTo(startX, startY)
     for (let i = 1; i <= num; i++) {
-      const newX = x + r * Math.cos((2 * Math.PI * i) / num)
-      const newY = y + r * Math.sin((2 * Math.PI * i) / num)
+      const newX = r * Math.cos((2 * Math.PI * i) / num)
+      const newY = r * Math.sin((2 * Math.PI * i) / num)
 
       points[i] = []
       points[i][0] = newX
@@ -211,6 +226,8 @@ export default class Render {
       ctx.fillStyle = fillStyle
       ctx.fill()
     }
+
+    ctx.restore()
 
     return points
   }

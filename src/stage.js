@@ -29,12 +29,14 @@ const enclosure = () => {
     left: {
       points: leftPoints,
       expression: util.getPointsExpression(leftPoints),
-      width
+      width,
+      frictionFactor: 0.2
     },
     right: {
       points: rightPoints,
       expression: util.getPointsExpression(rightPoints),
-      width
+      width,
+      frictionFactor: 0.2
     }
   }
 }
