@@ -16,10 +16,14 @@ export default class Brick {
       y: 100,
       x: 100
     }, attrs)
-    this.color = this.generateColor()
+    this.color = this._generateColor()
     this.id = uuid.v4()
+
+    // shaking, breaking
+    this.status = 'none'
   }
 
+  // 展开运算符无法获取到访问器属性
   set y (value) {
     this._y = value
     this._generatePoints(this.x, this.y, this.size, this.sides)
@@ -30,24 +34,20 @@ export default class Brick {
     return this._y
   }
 
-  set weight (value) {
-    this._weight = value
-    this.generateColor()
-  }
-
-  get weight () {
-    return this._weight
+  setWeight (val) {
+    this.weight = val
+    this._generateColor()
   }
 
   breaking (fn) {
     cancelAnimationFrame(this.shakingTimer)
     this.status = 'breaking'
-    const nums = 15
+    const nums = 20
     const pieces = []
-    const min = -30
-    const max = 30
-    const minSize = 3
-    const maxSize = 8
+    const min = -35
+    const max = 35
+    const minSize = 2
+    const maxSize = 6
 
     for (let i = 0; i < nums; i++) {
       const r = Math.floor(Math.random() * (maxSize - minSize) + minSize)
@@ -62,30 +62,39 @@ export default class Brick {
         y: y,
         rotate: Math.random() * 2 * Math.PI,
         scale: 1,
-        alpha: 0.8
+        alpha: Math.random() * 0.5 + 0.3
       }))
     }
 
     this.pieces = pieces
 
-
-    let times = 300
+    let duration = 500
     let timer = null
+    let start = new Date().getTime()
+    const pRotate = (45 * Math.PI / 180) / duration
+    const pScale = 0.4 / duration
+    const pAlpha = 0.3 / duration
     const doing = () => {
+      const end = new Date().getTime()
+      const dtime = end - start
+
+      start = end
+
       for (let i = 0; i < pieces.length; i++) {
         pieces[i].y += 1
-        pieces[i].rotate += 5 * Math.PI / 180
-        pieces[i].scale -= 1 / times
-        pieces[i].alpha -= 0.8 / times
+        pieces[i].rotate += pRotate * dtime
+        pieces[i].scale -= pScale * dtime
+        pieces[i].alpha -= pAlpha * dtime
       }
 
-      times--
 
       timer = requestAnimationFrame(() => {
         doing()
       })
 
-      if (!times) {
+      duration -= dtime
+
+      if (duration < 0) {
         cancelAnimationFrame(timer)
         fn()
         this.status = 'none'
@@ -101,8 +110,11 @@ export default class Brick {
       return
     }
     this.status = 'shaking'
+    this.shakingX = this.x
+    this.shakingY = this.y
     // const points = [this.x, this.y]
     let times = 6
+    const color = this.color
 
     this.shakingTimer = null
 
@@ -111,11 +123,13 @@ export default class Brick {
       const isOdd = times % 2 === 0
 
       if (isOdd) {
-        this.x -= 2
-        this.y -= 2
+        this.shakingX -= 1
+        this.shakingYy -= 1
+        this.color = chroma(this.color).darken(1.5)
       } else {
-        this.x += 2
-        this.y += 2
+        this.shakingX += 1
+        this.shakingY += 1
+        this.color = color
       }
 
       this.shakingTimer = requestAnimationFrame(() => {
@@ -144,7 +158,7 @@ export default class Brick {
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
 
-  generateColor () {
+  _generateColor () {
 
     const weight = this.weight - 1
     const colors = {

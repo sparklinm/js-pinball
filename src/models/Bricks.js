@@ -61,8 +61,8 @@ export default class Bricks {
     const i = Math.floor(this.level / 3) + 1
     // const min = i
     // const max = Math.floor(this.level * 1.2 + 5)
-    const min = 3
-    const max = 3
+    const min = 10
+    const max = 20
 
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
@@ -102,6 +102,13 @@ export default class Bricks {
       gapNums--
       remainWidth -= gap
     }
+    bricks.push(new Brick({
+      size: 26,
+      x: 225,
+      y: 400,
+      weight: 20,
+      sides: 4
+    }))
     return bricks
   }
 }
