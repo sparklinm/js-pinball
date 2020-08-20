@@ -19,7 +19,7 @@ export default class Brick {
     this.color = this._generateColor()
     this.id = uuid.v4()
 
-    // shaking, breaking
+    // nonde, shaking, breaking
     this.status = 'none'
   }
 

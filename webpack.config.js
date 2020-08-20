@@ -1,7 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const global = require('./src/global')
+// const global = require('./src/global')
 
 const webpack = require ('webpack')
 
@@ -24,7 +24,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html')
-    }),
-    new webpack.DefinePlugin(global)
+    })
+    // new webpack.DefinePlugin(global)
   ]
 }

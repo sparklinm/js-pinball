@@ -57,7 +57,8 @@ export default class Render {
       scale: attrs.scale,
       alpha: attrs.alpha
     })
-    this.ctx.font = '600 16px -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+    this.ctx.font =
+      '600 16px -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
     this.ctx.fillStyle = '#000'
     this.ctx.textAlign = 'center'
     this.ctx.textBaseline = 'middle'
@@ -106,7 +107,7 @@ export default class Render {
     const drawArrow = () => {
       const arrowH = 25
       const arrowGap = 15
-      const ds1 = direction ? (arrowH + arrowGap) : -(arrowH + arrowGap)
+      const ds1 = direction ? arrowH + arrowGap : -(arrowH + arrowGap)
       const point1 = getXY([startX, startY], k1, ds1)
       const ds2 = direction ? arrowGap : -arrowGap
       const bottomCenter = getXY([startX, startY], k1, ds2)
@@ -143,6 +144,16 @@ export default class Render {
     }
   }
 
+  text (text, conf = {}) {
+    this.ctx.font = `600 ${
+      conf.fontSize || '16px'
+    } -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`
+    this.ctx.fillStyle = conf.color || '#fff'
+    this.ctx.textAlign = 'center'
+    this.ctx.textBaseline = 'middle'
+    this.ctx.fillText(text, conf.x, conf.y)
+  }
+
   lines (ctx, points) {
     points.forEach((point, index) => {
       if (index === 0) {
@@ -153,8 +164,7 @@ export default class Render {
     })
   }
 
-  triangle (ctx, { point1, point2, point3, color = '#fff', type = 'fill' })
-  {
+  triangle (ctx, { point1, point2, point3, color = '#fff', type = 'fill' }) {
     ctx.beginPath()
     ctx.moveTo(...point1)
     ctx.lineTo(...point2)

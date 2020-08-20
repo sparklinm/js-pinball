@@ -1,4 +1,4 @@
-import * as util from './util'
+import { getPointsExpression, calculatePointsForBezierCurve } from './util'
 
 const canvasWidth = 450
 const canvasHeight = 800
@@ -28,15 +28,13 @@ const enclosure = () => {
   return {
     left: {
       points: leftPoints,
-      expression: util.getPointsExpression(leftPoints),
-      width,
-      u: 0.2
+      expression: getPointsExpression(leftPoints),
+      width
     },
     right: {
       points: rightPoints,
-      expression: util.getPointsExpression(rightPoints),
-      width,
-      u: 0.2
+      expression: getPointsExpression(rightPoints),
+      width
     }
   }
 }
@@ -60,7 +58,7 @@ const landslide = () => {
     end,
     width: 4,
     fillColor: '#272727',
-    points: util.calculatePointsForBezierCurve(
+    points: calculatePointsForBezierCurve(
       100,
       {
         x: begin[0],
@@ -82,9 +80,17 @@ const landslide = () => {
   }
 }
 
-export default {
+
+
+const stage = {
   enclosure: enclosure(),
   landslide: landslide(),
   canvasWidth,
-  canvasHeight
+  canvasHeight,
+  add (name, obj) {
+    this[name] = obj
+  }
 }
+
+
+export default stage

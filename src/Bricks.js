@@ -1,8 +1,13 @@
-import Brick from './Brick'
+import Brick from './models/Brick'
+import stage from './stage'
 
 export default class Bricks {
-  constructor (edge) {
-    this.edge = edge
+  constructor () {
+    this.edge = {
+      left: stage.enclosure.left.points[0][0],
+      right: stage.enclosure.right.points[0][0],
+      bottom: stage.enclosure.left.points[0][1]
+    }
     this.r = 26
     this.data = []
     this.lineHeight = this.r * 2 + 10
@@ -15,8 +20,8 @@ export default class Bricks {
     this.data.forEach(brick => {
       brick.y -= this.lineHeight
     })
-
     this.data = this.data.concat(data)
+    stage.add('bricks', this.data)
   }
   remove (index, nums = 1) {
     this.data.splice(index, nums)
@@ -102,13 +107,13 @@ export default class Bricks {
       gapNums--
       remainWidth -= gap
     }
-    bricks.push(new Brick({
-      size: 26,
-      x: 225,
-      y: 400,
-      weight: 20,
-      sides: 4
-    }))
+    // bricks.push(new Brick({
+    //   size: 26,
+    //   x: 225,
+    //   y: 400,
+    //   weight: 20,
+    //   sides: 4
+    // }))
     return bricks
   }
 }

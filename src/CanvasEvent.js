@@ -14,7 +14,7 @@ export default class CanvasEvent {
     this.mousemoveCB = cb
   }
 
-  shot (cb) {
+  shoot (cb) {
     this.mouseupCB = cb
   }
 

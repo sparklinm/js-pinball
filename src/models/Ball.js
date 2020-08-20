@@ -10,6 +10,12 @@ export default class Ball {
       vy: 0,
       color: '#fff'
     }, attrs)
+    // prepare, shoot, move, reset
+    this.status = 'prepare'
+    this.reset = {
+      points: [],
+      index: 0
+    }
   }
 
   setPosition (x, y) {

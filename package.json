@@ -17,6 +17,7 @@
   "dependencies": {
     "@flatten-js/core": "^1.2.10",
     "chroma-js": "^2.1.0",
+    "matter-js": "^0.14.2",
     "number-precision": "^1.5.0",
     "uuid": "^8.3.0"
   }
