@@ -4,6 +4,7 @@ export default class CanvasEvent {
     this.el.addEventListener('mousedown', this._mousedown.bind(this))
     this.el.addEventListener('mousemove', this._mousemove.bind(this))
     this.el.addEventListener('mouseup', this._mouseup.bind(this))
+    this.el.addEventListener('click', this._mouseup.bind(this))
     const rect = this.el.getBoundingClientRect()
 
     this.x = rect.left
@@ -24,6 +25,7 @@ export default class CanvasEvent {
 
   _mousemove (e) {
     if (this.down) {
+      this.move = true
       const positions = {
         x: e.offsetX,
         y: e.offsetY
@@ -35,11 +37,14 @@ export default class CanvasEvent {
 
   _mouseup (e) {
     this.down = false
-    const positions = {
-      x: e.offsetX,
-      y: e.offsetY
-    }
+    if (this.move) {
+      const positions = {
+        x: e.offsetX,
+        y: e.offsetY
+      }
 
-    this.mouseupCB(positions)
+      this.mouseupCB(positions)
+    }
+    this.move = false
   }
 }

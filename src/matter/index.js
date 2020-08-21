@@ -119,7 +119,7 @@ World.add(engine.world, [boxA, boxB, ...boundary])
 Engine.run(engine)
 
 // run the renderer
-Render.run(render)
+// Render.run(render)
 
 // const runner = Runner.create()
 

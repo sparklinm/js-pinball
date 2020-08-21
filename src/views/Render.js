@@ -1,5 +1,3 @@
-import { getXY, getDirection } from '../util'
-
 export default class Render {
   constructor (canvas) {
     this.canvas = canvas
@@ -19,14 +17,14 @@ export default class Render {
     const { points: leftPoints } = enclosure.left
     const { points: rightPoints } = enclosure.right
 
-    this.ctx.lineWidth = 4
-    this.ctx.strokeStyle = '#565656'
-    this.ctx.beginPath()
-    this.lines(this.ctx, leftPoints)
-    this.ctx.stroke()
-    this.ctx.beginPath()
-    this.lines(this.ctx, rightPoints)
-    this.ctx.stroke()
+    this.lines(this.ctx, leftPoints, {
+      lineWidth: 4,
+      strokeStyle: '#565656'
+    })
+    this.lines(this.ctx, rightPoints, {
+      lineWidth: 4,
+      strokeStyle: '#565656'
+    })
   }
 
   landslide (landslide) {
@@ -76,76 +74,70 @@ export default class Render {
     })
   }
 
-  aimLine (mouse) {
-    const startX = this.width / 2
-    const startY =
-      this.enclosure.left.points[this.enclosure.left.points.length - 1][1] + 20
-
-    if (mouse.y < startY) {
+  aimLine (obj) {
+    if (!obj) {
       return
     }
+    this.triangle(this.ctx, {
+      point1: obj.arrow[0],
+      point2: obj.arrow[1],
+      point3: obj.arrow[2]
+    })
 
-    const endX = mouse.x
-    const endY = mouse.y
-    const k1 = (endY - startY) / (endX - startX)
-    const angle = Math.atan(k1)
-
-    // 带正负符号
-    // 90度，cos 为 0 的情况用 sin 计算
-    const distance =
-      (endX - startX) / Math.cos(angle) || (endY - startY) / Math.sin(angle)
-
-    // 方向
-    // 1 代表沿直线x增大的方向，0 相反
-    const direction = distance >= 0 ? 1 : 0
-
-    const gap = 40
-    const r = 4
-    const gapCenter = gap + 2 * r
-    const nums = Math.floor(Math.abs(distance) / gapCenter)
-
-    const drawArrow = () => {
-      const arrowH = 25
-      const arrowGap = 15
-      const ds1 = direction ? arrowH + arrowGap : -(arrowH + arrowGap)
-      const point1 = getXY([startX, startY], k1, ds1)
-      const ds2 = direction ? arrowGap : -arrowGap
-      const bottomCenter = getXY([startX, startY], k1, ds2)
-      const k2 = -1 / k1
-      const baseSideW = 12
-      const point2 = getXY(bottomCenter, k2, baseSideW / 2)
-      const point3 = getXY(bottomCenter, k2, -baseSideW / 2)
-
-      this.triangle(this.ctx, {
-        point1,
-        point2,
-        point3
-      })
-    }
-
-    drawArrow()
-
-    for (let i = 0; i < nums; i++) {
-      const ds = direction ? gapCenter * (i + 1) : -gapCenter * (i + 1)
-      const point = getXY([startX, startY], k1, ds)
-
+    for (let i = 0; i < obj.circles.length; i++) {
       this.arc(this.ctx, {
-        x: point[0],
-        y: point[1],
-        r: r,
-        startAngle: 0,
-        endAngle: 360
+        ...obj.circles[i]
       })
-    }
-
-    return {
-      direction: getDirection(endX - startX, endY - startY),
-      angle: Math.atan(Math.abs(k1))
     }
   }
 
+  deadLine (deadLine) {
+    this.ctx.setLineDash([5, 5])
+    this.lines(this.ctx, deadLine, {
+      lineWidth: 1,
+      strokeStyle: '#565656'
+    })
+  }
+
+  gameOver (score) {
+    this.ctx.fillStyle = 'RGBA(0, 0, 0, 0.8)'
+    this.ctx.fillRect(0, 0, this.width, this.height)
+    this.text('本次得分', {
+      x: this.width / 2,
+      y: 100,
+      fontSize: '16px'
+    })
+    this.text(score, {
+      x: this.width / 2,
+      y: 150,
+      fontSize: '40px',
+      fontWeight: 600
+    })
+  }
+
+  items (items) {
+    items.forEach((item) => {
+      this.ctx.drawImage(item.img, item.x, item.y, item.width, item.height)
+      this.text(item.text, {
+        x: item.x + item.width / 2,
+        y: item.y + item.height + 5,
+        fontWeight: 600
+      })
+      this.ellipse(this.ctx, {
+        startAngle: 0,
+        endAngle: 360,
+        color: '#ffff00',
+        x: item.x + item.width,
+        y: item.y + 10,
+        radiusX: 16,
+        radiusY: 12,
+        rotation: 0
+      })
+    })
+  }
+
   text (text, conf = {}) {
-    this.ctx.font = `600 ${
+    this.ctx.font = `${conf.fontWeight || '500'} ${
       conf.fontSize || '16px'
     } -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`
     this.ctx.fillStyle = conf.color || '#fff'
@@ -154,14 +146,17 @@ export default class Render {
     this.ctx.fillText(text, conf.x, conf.y)
   }
 
-  lines (ctx, points) {
+  lines (ctx, points, conf = {}) {
+    Object.assign(ctx, conf)
+    ctx.beginPath()
     points.forEach((point, index) => {
       if (index === 0) {
         ctx.moveTo(...point)
       } else {
-        this.ctx.lineTo(...point)
+        ctx.lineTo(...point)
       }
     })
+    ctx.stroke()
   }
 
   triangle (ctx, { point1, point2, point3, color = '#fff', type = 'fill' }) {
@@ -182,6 +177,32 @@ export default class Render {
     ctx[type + 'Style'] = color
     ctx.closePath()
     ctx[type]()
+  }
+
+  ellipse (ctx, options = {}) {
+    const unit = Math.PI / 180
+
+    const conf = Object.assign(
+      {
+        color: '#fff',
+        type: 'fill'
+      },
+      options
+    )
+
+    ctx.beginPath()
+    ctx.ellipse(
+      conf.x,
+      conf.y,
+      conf.radiusX,
+      conf.radiusY,
+      conf.rotation * unit,
+      conf.startAngle * unit,
+      conf.endAngle * unit
+    )
+    ctx[conf.type + 'Style'] = conf.color
+    ctx.closePath()
+    ctx[conf.type]()
   }
 
   polygon (ctx, conf) {

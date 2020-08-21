@@ -2,7 +2,7 @@ import Brick from './models/Brick'
 import stage from './stage'
 
 export default class Bricks {
-  constructor () {
+  constructor (event = {}) {
     this.edge = {
       left: stage.enclosure.left.points[0][0],
       right: stage.enclosure.right.points[0][0],
@@ -12,6 +12,7 @@ export default class Bricks {
     this.data = []
     this.lineHeight = this.r * 2 + 10
     this.level = 0
+    this.event = event
   }
   add () {
     this.level++
@@ -21,19 +22,47 @@ export default class Bricks {
       brick.y -= this.lineHeight
     })
     this.data = this.data.concat(data)
+
     stage.add('bricks', this.data)
+
+    const y = this.data[0].y
+
+    this.event.added && this.event.added(y)
   }
   remove (index, nums = 1) {
     this.data.splice(index, nums)
   }
-  animate () {
+  removeOneLine (index = 1) {
+    let start = 0
+
+    for (let index = this.data.length - 1; index >= 0; index--) {
+      const cur = this.data[index]
+      const pre = this.data[index - 1]
+
+      if (pre && cur.y !== pre.y) {
+        start = index
+        break
+      }
+
+    }
+    this.data.splice(start, 100)
+    this.data.forEach(brick => {
+      brick.y += this.lineHeight
+    })
+    this.animate(1)
+  }
+  animate (direction = -1) {
     const points = []
     let start = new Date().getTime()
     let timer = null
 
     this.data.forEach(brick => {
       points.push([brick.x, brick.y])
-      brick.y += this.lineHeight
+      if (direction === -1) {
+        brick.y += this.lineHeight
+      } else {
+        brick.y -= this.lineHeight
+      }
     })
 
     const doing = () => {
@@ -45,10 +74,18 @@ export default class Bricks {
       start = end
 
       this.data.forEach((brick, index) => {
-        brick.y -= dtime * 300 / 1000
-        if (brick.y <= points[index][1]) {
-          brick.y = points[index][1]
-          flag = true
+        if (direction === -1) {
+          brick.y -= dtime * 300 / 1000
+          if (brick.y <= points[index][1]) {
+            brick.y = points[index][1]
+            flag = true
+          }
+        } else {
+          brick.y += dtime * 300 / 1000
+          if (brick.y >= points[index][1]) {
+            brick.y = points[index][1]
+            flag = true
+          }
         }
       })
       timer = requestAnimationFrame(() => {
