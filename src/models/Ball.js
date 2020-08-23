@@ -1,7 +1,7 @@
 export default class Ball {
   constructor (attrs) {
     Object.assign(this, {
-      weight: 5,
+      weight: 1,
       size: 8,
       x: 100,
       y: 100,
@@ -21,5 +21,9 @@ export default class Ball {
   setPosition (x, y) {
     this.x = x
     this.y = y
+  }
+
+  setSize (value) {
+    this.size = value
   }
 }

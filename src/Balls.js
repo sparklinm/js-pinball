@@ -10,8 +10,9 @@ export default class Balls {
       time: 0,
       v: 600,
       x: stage.canvasWidth / 2,
-      y: stage.enclosure.left.points[stage.enclosure.left.points.length - 1][1] +
-      20
+      y:
+        stage.enclosure.left.points[stage.enclosure.left.points.length - 1][1] +
+        20
     }
     this.event = event
     this.data = []
@@ -20,14 +21,19 @@ export default class Balls {
 
   add (num = 1) {
     for (let i = 0; i < num; i++) {
-      this.data.push(
-        new Ball({
-          x: this.start.x,
-          y: this.start.y,
-          v: 600,
-          status: 'prepare'
-        })
-      )
+      const ball = new Ball({
+        x: Math.random() * (stage.canvasWidth - 30 - 30) + 30,
+        y: 20,
+        v: 600,
+        status: 'prepare'
+      })
+
+      this.data.push(ball)
+
+      matter.addBalls(this.data[i], (mball) => {
+        ball.x = mball.position.x
+        ball.y = mball.position.y
+      })
     }
   }
 
@@ -58,75 +64,77 @@ export default class Balls {
   }
 
   move (duration) {
-    return new Promise((resolve) => {
-      // console.time('start')
-      // 换成秒
-      const dtime = duration / 1000
-      const g = physical.g
+    // console.time('start')
+    // 换成秒
+    const dtime = duration / 1000
+    const g = physical.g
 
-      this.data.forEach((ball, index) => {
-        setTimeout(() => {
-          if (ball.status === 'reset') {
-            if (ball.reset.index >= ball.reset.points.length) {
-              matter.addBalls(ball, (mball) => {
-                ball.x = mball.position.x
-                ball.y = mball.position.y
-              })
-              ball.status = 'prepare'
-              ball.color = '#fff'
+    this.data.forEach((ball, index) => {
+      setTimeout(() => {
+        if (ball.status === 'reset') {
+          if (ball.reset.index >= ball.reset.points.length) {
+            matter.addBalls(ball, (mball) => {
+              ball.x = mball.position.x
+              ball.y = mball.position.y
+            })
+            ball.status = 'prepare'
+            ball.color = '#fff'
 
-              this.movedNums++
-              if (this.movedNums === this.data.length) {
-                this.movedNums = 0
-                this.event.moveend && this.event.moveend()
-              }
-              return
-            }
-
-            ball.x = ball.reset.points[ball.reset.index][0]
-            ball.y = ball.reset.points[ball.reset.index][1]
-            if (dtime > 10 / 1000) {
-              ball.reset.index += 2
-            } else {
-              ball.reset.index++
+            this.movedNums++
+            if (this.movedNums === this.data.length) {
+              this.movedNums = 0
+              this.event.moveend && this.event.moveend()
             }
             return
           }
 
-          if (ball.status === 'prepare') {
-
-            return
+          ball.x = ball.reset.points[ball.reset.index][0]
+          ball.y = ball.reset.points[ball.reset.index][1]
+          if (dtime > 10 / 1000) {
+            ball.reset.index += 2
+          } else {
+            ball.reset.index++
           }
+          return
+        }
 
-          if (ball.status === 'shoot') {
-            if (ball.y < stage.enclosure.left.points[2][1]) {
-              this.setPostion(ball)
-            }
-            ball.x += ball.vx * dtime
-            ball.y += ball.vy * dtime
+        if (ball.status === 'prepare') {
+          return
+        }
+
+        if (ball.status === 'shoot') {
+          if (ball.y < stage.enclosure.left.points[2][1]) {
+            this.setPostion(ball)
           }
+          ball.x += ball.vx * dtime
+          ball.y += ball.vy * dtime
+        }
 
-          if (ball.status === 'move') {
-            ball.x += ball.vx * dtime
-            ball.y += physical.computeDistacneByA(ball.vy, g, dtime)
-            ball.vy = physical.computeV(ball.vy, g, dtime)
-          }
+        if (ball.status === 'move') {
+          ball.x += ball.vx * dtime
+          ball.y += physical.computeDistacneByA(ball.vy, g, dtime)
+          ball.vy = physical.computeV(ball.vy, g, dtime)
+        }
 
-          this.collision(ball)
-        }, index * 100)
-      })
-    // console.timeEnd('start')
+        if (ball.y < stage.deadLine[0][1]) {
+          ball.vx = -ball.vx
+        }
+
+        this.collision(ball)
+      }, index * 100)
     })
+    // console.timeEnd('start')
   }
 
   collision (ball) {
     const { enclosure, landslide, bricks, canvasWidth } = stage
 
     // 球运动直线k,b
-    const k1 = ball.vy / ball.vx
+    let k1 = ball.vy / ball.vx
     let b1 = ball.y - k1 * ball.x
 
-    if (k1 === Infinity) {
+    if (Math.abs(k1) === Infinity) {
+      k1 = Infinity
       b1 = ball.x
     }
 
@@ -203,10 +211,28 @@ export default class Balls {
     }
 
     bricks.forEach((brick, bindex) => {
-      if (brick.status === 'breaking') {
+      if (brick.status === 'breaking' || brick.status === 'breaked') {
         return
       }
-      brick.expression.some((exp, index) => {
+
+      if (brick.type === 'bigger_ball') {
+        if (
+          circleAndcircle(
+            {
+              x: ball.x,
+              y: ball.y,
+              r: ball.size
+            },
+            brick
+          )
+        ) {
+          ball.size += 4
+          ball.weight += 1
+          bricks.splice(bindex, 1)
+        }
+        return
+      }
+      brick.expression.forEach((exp, index) => {
         const d = util.getPointLineDistance([ball.x, ball.y], ...exp)
         const p1 = brick.points[index]
         const p2 =
@@ -219,15 +245,18 @@ export default class Balls {
           [p2[0] - p1[0], p2[1] - p1[1]]
         )
 
-
         if (
           res < 0 &&
-          d < ball.size &&
-          util.intersectionOnLineSegment(k1, b1, ...exp, p1, p2)
+          d < ball.size
         ) {
           if (util.projectionOnLineSegment([ball.x, ball.y], p1, p2)) {
             // 碰撞的是边
-            const cPoints = util.findLinePointDistanceTo(ball.size, k1, b1, ...exp)
+            const cPoints = util.findLinePointDistanceTo(
+              ball.size,
+              k1,
+              b1,
+              ...exp
+            )
             let isEdge = false
             let dot1 = []
             let reflexK = exp[0]
@@ -277,20 +306,17 @@ export default class Balls {
               [ball.x, ball.y] = dot2
             }
 
-
             ball.status = 'move'
 
             const [newVx, newVy] = util.reflexV(ball.vx, ball.vy, reflexK)
 
             ball.vx = newVx
             ball.vy = newVy
-            brick.setWeight(brick.weight - 1)
+            brick.setWeight(brick.weight - ball.weight)
             brick.shaking()
             this.event.collided && this.event.collided()
             if (brick.weight < 1) {
-              brick.breaking(() => {
-                bricks.splice(bindex, 1)
-              })
+              brick.breaking()
             }
             return true
           }
@@ -300,6 +326,14 @@ export default class Balls {
   }
 }
 
+function circleAndcircle (c1, c2) {
+  const d = util.getPointsDistance([c1.x, c1.y], [c2.x, c2.y])
+
+  if (d <= c1.r + c2.r) {
+    return true
+  }
+  return false
+}
 
 function collisionEnclosure (ball, enclosure) {
   // 球运动直线k,b
@@ -364,7 +398,6 @@ function collisionEnclosure (ball, enclosure) {
 
   return collision
 }
-
 
 // https://www.ibm.com/developerworks/cn/web/wa-html5-game8/index.html#artrelatedtopics
 

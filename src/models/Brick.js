@@ -16,10 +16,13 @@ export default class Brick {
       y: 100,
       x: 100
     }, attrs)
-    this.color = this._generateColor()
+
+    if (!this.color) {
+      this.color = this._generateColor()
+    }
     this.id = uuid.v4()
 
-    // nonde, shaking, breaking
+    // nonde, shaking, breaking, breaked
     this.status = 'none'
   }
 
@@ -36,18 +39,18 @@ export default class Brick {
 
   setWeight (val) {
     this.weight = val
-    this._generateColor()
+    this.color = this._generateColor()
   }
 
   breaking (fn) {
-    cancelAnimationFrame(this.shakingTimer)
+    clearInterval(this.shakingTimer)
     this.status = 'breaking'
-    const nums = 20
+    const nums = 30
     const pieces = []
     const min = -35
     const max = 35
     const minSize = 2
-    const maxSize = 6
+    const maxSize = 7
 
     for (let i = 0; i < nums; i++) {
       const r = Math.floor(Math.random() * (maxSize - minSize) + minSize)
@@ -60,15 +63,17 @@ export default class Brick {
         size: r,
         x: x,
         y: y,
+        xDirection: Math.random() > 0.5 ? 1 : -1,
         rotate: Math.random() * 2 * Math.PI,
         scale: 1,
-        alpha: Math.random() * 0.5 + 0.3
+        alpha: Math.random() * 0.5 + 0.3,
+        color: this.color
       }))
     }
 
     this.pieces = pieces
 
-    let duration = 500
+    let duration = 400
     let timer = null
     let start = new Date().getTime()
     const pRotate = (45 * Math.PI / 180) / duration
@@ -79,12 +84,22 @@ export default class Brick {
       const dtime = end - start
 
       start = end
+      duration -= dtime
 
       for (let i = 0; i < pieces.length; i++) {
-        pieces[i].y += 1
+        if (pieces[i].xDirection === 1) {
+          pieces[i].x += 0.1
+        } else {
+          pieces[i].x -= 0.1
+        }
+        pieces[i].y += 0.3
         pieces[i].rotate += pRotate * dtime
         pieces[i].scale -= pScale * dtime
-        pieces[i].alpha -= pAlpha * dtime
+        if (duration < 0) {
+          pieces[i].alpha = 0
+        } else {
+          pieces[i].alpha -= pAlpha * dtime
+        }
       }
 
 
@@ -92,12 +107,11 @@ export default class Brick {
         doing()
       })
 
-      duration -= dtime
 
       if (duration < 0) {
         cancelAnimationFrame(timer)
-        fn()
-        this.status = 'none'
+        this.status = 'breaked'
+        typeof fn === 'function' && fn()
       }
     }
 
@@ -119,28 +133,26 @@ export default class Brick {
     this.shakingTimer = null
 
     const doing = () => {
+      this.shakingTimer = setInterval(() => {
+        const isOdd = times % 2 === 0
 
-      const isOdd = times % 2 === 0
+        if (isOdd) {
+          this.shakingX -= 1
+          this.shakingY -= 1
+          this.color = chroma(this.color).darken(1.5)
+        } else {
+          this.shakingX += 1
+          this.shakingY += 1
+          this.color = color
+        }
 
-      if (isOdd) {
-        this.shakingX -= 1
-        this.shakingYy -= 1
-        this.color = chroma(this.color).darken(1.5)
-      } else {
-        this.shakingX += 1
-        this.shakingY += 1
-        this.color = color
-      }
 
-      this.shakingTimer = requestAnimationFrame(() => {
-        doing()
-      })
-
-      times--
-      if (!times) {
-        cancelAnimationFrame(this.shakingTimer)
-        this.status = 'none'
-      }
+        times--
+        if (!times) {
+          clearInterval(this.shakingTimer)
+          this.status = 'none'
+        }
+      }, 16)
     }
 
     doing()
@@ -161,6 +173,7 @@ export default class Brick {
   _generateColor () {
 
     const weight = this.weight - 1
+
     const colors = {
       1: '#FCFF00',
       2: '#CCFF00',

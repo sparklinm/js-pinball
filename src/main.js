@@ -1,3 +1,5 @@
+import './resources'
+
 import Render from './views/Render'
 import Bricks from './Bricks'
 import Balls from './Balls'
@@ -14,8 +16,6 @@ function init () {
   const canvasEvent = new CanvasEvent(canvas)
   // PREPARE
   // RUN
-
-
   let GAME_STATUS = 'PREPARE'
   let timeStamp = 0
   let duration = 0
@@ -31,9 +31,13 @@ function init () {
   })
   const balls = new Balls({
     moveend: () => {
+      bricks.removeBreaked()
       GAME_STATUS = 'PREPARE'
       bricks.add()
       bricks.animate()
+      if (bricks.level % 5 === 0) {
+        balls.add(1)
+      }
     },
     collided: () => {
       score++
@@ -43,8 +47,7 @@ function init () {
 
 
   bricks.add()
-  bricks.add()
-  balls.add(10)
+  balls.add(5)
   console.log(bricks.data)
   console.log(stage)
 
@@ -64,7 +67,7 @@ function init () {
   })
 
   canvasEvent.shoot(() => {
-    if (GAME_STATUS === 'PREPARE') {
+    if (GAME_STATUS === 'PREPARE' && aimLine) {
       balls.init()
       GAME_STATUS = 'RUN'
       aimLine = null
@@ -77,10 +80,13 @@ function init () {
 
     stage.items.forEach(item => {
       if (x >= item.x && x <= item.x + item.width && y >= item.y && y <= item.y + item.height) {
-        if (item.name === 'remove_one_line') {
+        if (item.name === 'remove_one_line' && GAME_STATUS === 'PREPARE') {
+          if (item.nums <= 0) {
+            return
+          }
+          item.nums--
           bricks.removeOneLine()
         }
-
       }
     })
   })

@@ -1,5 +1,8 @@
 import Brick from './models/Brick'
+import SpecialBrick from './models/SpecialBrick'
 import stage from './stage'
+
+
 
 export default class Bricks {
   constructor (event = {}) {
@@ -34,8 +37,15 @@ export default class Bricks {
   }
   removeOneLine (index = 1) {
     let start = 0
+    const promises = []
 
     for (let index = this.data.length - 1; index >= 0; index--) {
+      promises.push(new Promise(resolve => {
+        this.data[index].breaking(() => {
+          resolve()
+        })
+      }))
+
       const cur = this.data[index]
       const pre = this.data[index - 1]
 
@@ -43,14 +53,27 @@ export default class Bricks {
         start = index
         break
       }
-
     }
-    this.data.splice(start, 100)
-    this.data.forEach(brick => {
-      brick.y += this.lineHeight
+
+    Promise.all(promises).then(() => {
+      this.data.splice(start, 100)
+
+      this.data.forEach(brick => {
+        brick.y += this.lineHeight
+      })
+      this.animate(1)
     })
-    this.animate(1)
   }
+
+  removeBreaked () {
+    this.data = this.data.filter(brick => {
+      if (brick.status === 'breaking' || brick.status === 'breaked') {
+        return false
+      }
+      return true
+    })
+  }
+
   animate (direction = -1) {
     const points = []
     let start = new Date().getTime()
@@ -101,17 +124,17 @@ export default class Bricks {
   }
   __generateWeight () {
     const i = Math.floor(this.level / 3) + 1
-    // const min = i
-    // const max = Math.floor(this.level * 1.2 + 5)
-    const min = 10
-    const max = 20
+    const min = i
+    const max = Math.floor(this.level * 1.2 + 5)
+    // const min = 10
+    // const max = 20
 
     return Math.floor(Math.random() * (max - min + 1) + min)
   }
+
   generate () {
     // 3~5
     const nums = Math.floor(Math.random() * 4) + 2
-
 
     // const nums = 3
     const bricks = []
@@ -133,12 +156,29 @@ export default class Bricks {
         x = bricks[i - 1].x + gap + 2 * this.r
       }
 
-      const brick = new Brick({
-        size: this.r,
-        x: x,
-        y: this.edge.bottom,
-        weight: this.__generateWeight()
-      })
+      const random = Math.random() * 100
+
+      let brick = null
+
+      if (random < 10) {
+        brick = new SpecialBrick(
+          {
+            type: 'bigger_ball',
+            x: x,
+            y: this.edge.bottom,
+            r: this.r * 0.65
+          }
+        )
+      } else {
+        brick = new Brick({
+          size: this.r,
+          x: x,
+          y: this.edge.bottom,
+          weight: this.__generateWeight()
+        })
+      }
+
+
 
       bricks.push(brick)
       gapNums--
@@ -149,7 +189,7 @@ export default class Bricks {
     //   x: 225,
     //   y: 400,
     //   weight: 20,
-    //   sides: 4
+    //   sides: 5
     // }))
     return bricks
   }

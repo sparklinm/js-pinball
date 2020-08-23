@@ -3,6 +3,8 @@ import { getPointsExpression,
          getXY,
          getDirection } from './util'
 
+import resources from './resources'
+
 const canvasWidth = 450
 const canvasHeight = 800
 
@@ -87,7 +89,7 @@ function computeAimLine (mouse) {
     this.enclosure.left.points[this.enclosure.left.points.length - 1][1] + 20
 
   if (mouse.y < startY) {
-    return
+    return {}
   }
 
   const endX = mouse.x
@@ -154,31 +156,26 @@ function deadLine () {
 
   points[0] = [enclosure.left.points[1][0], enclosure.left.points[2][1] + 5]
 
-  points[1] = [enclosure.right.points[1][0], enclosure.left.points[2][1] + 8]
+  points[1] = [enclosure.right.points[1][0], enclosure.left.points[2][1] + 5]
 
   return points
 }
 
 function items () {
-  const magic_wand = new Image()
-
-  magic_wand.src = '/public/img/magic_wand.png'
   const x = 20
-  const y = landslide.begin[1] - 20
+  const y = landslide.begin[1] - 10
   const items = []
 
-  magic_wand.onload = () => {
-    items[0] = {
-      name: 'remove_one_line',
-      text: '消一行',
-      img: magic_wand,
-      x: x,
-      y: y,
-      rotate: 90,
-      width: 60,
-      height: 60,
-      nums: 3
-    }
+  items[0] = {
+    name: 'remove_one_line',
+    text: '消一行',
+    img: resources.magic_wand,
+    x: x,
+    y: y,
+    rotate: 90,
+    width: 60,
+    height: 60,
+    nums: 3
   }
 
   return items

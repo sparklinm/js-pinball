@@ -1,16 +1,20 @@
 // https://github.com/alexbol99/flatten-js
 import { Point, Line, Circle } from '@flatten-js/core'
+import NP from 'number-precision'
 
 // 联立直线解析式求交点
 export function linesIntersect (k1, b1, k2, b2) {
-  if (k1 === Infinity) {
+  if (k1 === k2) {
+    return []
+  }
+  if (Math.abs(k1) === Infinity) {
     return [b1, k2 * b1 + b2]
   }
 
-  if (k2 === Infinity) {
+  if (Math.abs(k2) === Infinity) {
     return [b2, k1 * b2 + b1]
   }
-  return [(b2 - b1) / (k1 - k2), (k1 * (b1 + b2) - b1 * (k1 + k2)) / (k1 - k2)]
+  return [(b1 - b2) / (k2 - k1), (k1 * (b1 + b2) - b1 * (k1 + k2)) / (k1 - k2)]
 }
 
 // 两点间距离
@@ -26,7 +30,7 @@ export function getPointLineDistance (point, k, b) {
   const x = point[0]
   const y = point[1]
 
-  if (k === Infinity) {
+  if (Math.abs(k) === Infinity) {
     return Math.abs(x - b)
   }
 
@@ -44,19 +48,27 @@ export function vectorPosition (v1, v2) {
   return res > 0 ? 1 : res < 0 ? -1 : 0
 }
 
-
 // 点是否在线段上
 export function pointOnLineSegment (p, p1, p2, include = true) {
   // p 在p1、p2的直线上
-  // 向量叉乘为0，向量 p1 p x 向量 p2 p = 0
+  // 向量叉乘为0，向量 p1 p 叉乘 向量 p2 p = 0
   // https://www.cnblogs.com/zzdyyy/p/7643267.html
   // 这里存在精度问题
+
+  const precision = 0.0001
+
   if (
-    (p1[0] - p[0]) * (p2[1] - p[1]) - (p2[0] - p[0]) * (p1[1] - p[1]) >=
-    0.0001
+    Math.abs(
+      (p1[0] - p[0]) * (p2[1] - p[1]) - (p2[0] - p[0]) * (p1[1] - p[1])
+    ) >= precision
   ) {
     return false
   }
+
+
+  p[0] = numberPrecision(p[0], p1[0], precision)
+  p[1] = numberPrecision(p[1], p1[1], precision)
+
 
   if (include) {
     // p点在p1 p2中间
@@ -71,6 +83,17 @@ export function pointOnLineSegment (p, p1, p2, include = true) {
     !((p[1] >= p1[1] && p[1] >= p2[1]) || (p[1] <= p1[1] && p[1] <= p2[1]))
   )
 }
+
+function numberPrecision (a, b, p = 0.0001) {
+  if (Math.abs(a - b) <= p) {
+    return b
+  }
+  return a
+}
+
+// function compare (a, b, { precision = 0.0001, flag = '>' }) {
+//   const res = Math.abs(a - b)
+// }
 
 // 判断两条直线交点是否在某条线段上
 export function intersectionOnLineSegment (k1, b1, k2, b2, p1, p2) {
@@ -148,7 +171,7 @@ export function reflexV (
   // console.log((newVAngle * 180) / Math.PI)
 
   // 垂直于x轴，无斜率
-  if (linek === Infinity) {
+  if (Math.abs(linek) === Infinity) {
     return [-Math.cos(vAngle) * v, Math.sin(vAngle) * v]
   }
 
@@ -204,7 +227,7 @@ export function getDirection (dx, dy) {
 export function getExpression (point1, point2) {
   const k = getK(point1, point2)
 
-  if (k === Infinity) {
+  if (Math.abs(k) === Infinity) {
     return [k, point1[0]]
   }
 
@@ -284,7 +307,7 @@ export function generatePoints (nums, p1, p2) {
   let pieceY = 0
   const points = []
 
-  if (k === Infinity) {
+  if (Math.abs(k) === Infinity) {
     const length = p2[1] - p1[1]
 
     pieceY = length / nums
@@ -305,7 +328,7 @@ export function generatePoints (nums, p1, p2) {
 
 // 截距式转一般式
 export function generalTypeLine (k, b) {
-  if (k === Infinity) {
+  if (Math.abs(k) === Infinity) {
     // a, b, c
     return [1, 0, -b]
   }
@@ -360,7 +383,7 @@ export function intersectionLineCircle (k1, b1, p3, r) {
   let p1 = []
   let p2 = []
 
-  if (k1 === Infinity) {
+  if (Math.abs(k1) === Infinity) {
     p1 = [b1, 0]
     p2 = [b1, 1]
   } else {
@@ -414,4 +437,3 @@ export function circleCenter (r, d, point, vx, vy, k2) {
 
   return [newX, newY]
 }
-

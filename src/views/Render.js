@@ -45,6 +45,26 @@ export default class Render {
   }
 
   brick (attrs) {
+    if (attrs.type === 'bigger_ball') {
+      this.ctx.save()
+
+      const angle = attrs.rotate * Math.PI / 180
+
+      this.ctx.translate(attrs.x, attrs.y)
+      this.ctx.rotate(angle)
+      this.ctx.scale(attrs.scale, attrs.scale)
+      this.ctx.globalAlpha = attrs.alpha
+      this.ctx.drawImage(
+        attrs.img,
+        - attrs.width / 2,
+        - attrs.height / 2,
+        attrs.width,
+        attrs.height
+      )
+
+      this.ctx.restore()
+      return
+    }
     this.polygon(this.ctx, {
       x: attrs.x,
       y: attrs.y,
@@ -92,11 +112,13 @@ export default class Render {
   }
 
   deadLine (deadLine) {
+    this.ctx.save()
     this.ctx.setLineDash([5, 5])
     this.lines(this.ctx, deadLine, {
       lineWidth: 1,
       strokeStyle: '#565656'
     })
+    this.ctx.restore()
   }
 
   gameOver (score) {
@@ -120,30 +142,49 @@ export default class Render {
       this.ctx.drawImage(item.img, item.x, item.y, item.width, item.height)
       this.text(item.text, {
         x: item.x + item.width / 2,
-        y: item.y + item.height + 5,
-        fontWeight: 600
+        y: item.y + item.height + 15,
+        color: '#ffff00',
+        strokeStyle: '#B46E1C',
+        fontSize: '18px'
       })
-      this.ellipse(this.ctx, {
+
+      const circle = {
         startAngle: 0,
         endAngle: 360,
-        color: '#ffff00',
+        color: '#F04028',
         x: item.x + item.width,
         y: item.y + 10,
-        radiusX: 16,
-        radiusY: 12,
+        radiusX: 14,
+        radiusY: 14,
         rotation: 0
+      }
+
+      this.ellipse(this.ctx, circle)
+      this.text(item.nums, {
+        x: circle.x,
+        y: circle.y,
+        color: '#fff',
+        fontSize: '16px'
       })
     })
   }
 
   text (text, conf = {}) {
+    this.ctx.save()
     this.ctx.font = `${conf.fontWeight || '500'} ${
       conf.fontSize || '16px'
     } -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`
-    this.ctx.fillStyle = conf.color || '#fff'
     this.ctx.textAlign = 'center'
     this.ctx.textBaseline = 'middle'
+    this.ctx.lineWidth = 4
+    if (conf.strokeStyle) {
+      this.ctx.strokeStyle = conf.strokeStyle
+      this.ctx.strokeText(text, conf.x, conf.y)
+    }
+    this.ctx.fillStyle = conf.color || '#fff'
     this.ctx.fillText(text, conf.x, conf.y)
+    this.ctx.restore()
+    // 登录状态下不会出现这行文字，点击页面右上角一键登录()
   }
 
   lines (ctx, points, conf = {}) {
@@ -220,7 +261,7 @@ export default class Render {
     if (conf.rotate) {
       ctx.rotate(conf.rotate)
     }
-    if (conf.alpha) {
+    if (conf.alpha !== undefined) {
       ctx.globalAlpha = conf.alpha
     }
     if (conf.scale) {
