@@ -40,11 +40,7 @@ export default class Bricks {
     const promises = []
 
     for (let index = this.data.length - 1; index >= 0; index--) {
-      promises.push(new Promise(resolve => {
-        this.data[index].breaking(() => {
-          resolve()
-        })
-      }))
+      promises.push(this.data[index].breaking())
 
       const cur = this.data[index]
       const pre = this.data[index - 1]
@@ -57,7 +53,6 @@ export default class Bricks {
 
     Promise.all(promises).then(() => {
       this.data.splice(start, 100)
-
       this.data.forEach(brick => {
         brick.y += this.lineHeight
       })
@@ -75,6 +70,9 @@ export default class Bricks {
   }
 
   animate (direction = -1) {
+    if (!this.data.length) {
+      return
+    }
     const points = []
     let start = new Date().getTime()
     let timer = null
@@ -89,7 +87,6 @@ export default class Bricks {
     })
 
     const doing = () => {
-
       const end = new Date().getTime()
       const dtime = end - start
       let flag = false
@@ -115,7 +112,6 @@ export default class Bricks {
         doing()
       })
       if (flag) {
-
         cancelAnimationFrame(timer)
       }
     }

@@ -43,16 +43,20 @@ export default class SpecialBrick {
   }
 
   breaking () {
-    this.status = 'breaking'
-    const durtion = 500
-    const piece = 16 / durtion * 1
-    const timer = setInterval(() => {
-      this.alpha -= piece
+    return new Promise(resolve => {
+      this.status = 'breaking'
+      const durtion = 500
+      const piece = 16 / durtion * 1
+      const timer = setInterval(() => {
+        this.alpha -= piece
 
-      if (this.alpha <= 0) {
-        clearInterval(timer)
-        this.status = 'breaked'
-      }
-    }, 16)
+        if (this.alpha <= 0) {
+          clearInterval(timer)
+          this.status = 'breaked'
+          resolve()
+        }
+      }, 16)
+    })
+
   }
 }

@@ -12,10 +12,10 @@ const Body = Matter.Body
 const engine = Engine.create()
 
 // create a renderer
-const render = Render.create({
-  element: document.body,
-  engine: engine
-})
+// const render = Render.create({
+//   element: document.body,
+//   engine: engine
+// })
 
 // create two boxes and a ground
 

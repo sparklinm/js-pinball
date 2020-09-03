@@ -1,11 +1,17 @@
 export default class CanvasEvent {
   constructor (el) {
     this.el = el
-    this.el.addEventListener('mousedown', this._mousedown.bind(this))
-    this.el.addEventListener('mousemove', this._mousemove.bind(this))
-    this.el.addEventListener('mouseup', this._mouseup.bind(this))
-    this.el.addEventListener('click', this._mouseup.bind(this))
-
+    if ('ontouchstart' in window) {
+      this.isMobile = true
+      this.el.addEventListener('touchstart', this._mousedown.bind(this))
+      this.el.addEventListener('touchmove', this._mousemove.bind(this))
+      this.el.addEventListener('touchend', this._mouseup.bind(this))
+    } else {
+      this.el.addEventListener('mousedown', this._mousedown.bind(this))
+      this.el.addEventListener('mousemove', this._mousemove.bind(this))
+      this.el.addEventListener('mouseup', this._mouseup.bind(this))
+      this.el.addEventListener('click', this._mouseup.bind(this))
+    }
   }
 
   aim (cb) {
@@ -26,10 +32,16 @@ export default class CanvasEvent {
 
   _mousemove (e) {
     if (this.down) {
-      const position = {
+      const position = this.isMobile ? {
+        x: e.targetTouches[0].offsetX,
+        y: e.targetTouches[0].offsetY
+      } : {
         x: e.offsetX,
         y: e.offsetY
       }
+
+
+
 
       const d = Math.abs(position.x - this.start.x) + Math.abs(position.y - this.start.y)
 
@@ -43,7 +55,10 @@ export default class CanvasEvent {
   _mouseup (e) {
     this.down = false
     if (this.move) {
-      const position = {
+      const position = this.isMobile ? {
+        x: e.targetTouches[0].offsetX,
+        y: e.targetTouches[0].offsetY
+      } : {
         x: e.offsetX,
         y: e.offsetY
       }

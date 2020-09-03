@@ -42,80 +42,82 @@ export default class Brick {
     this.color = this._generateColor()
   }
 
-  breaking (fn) {
-    clearInterval(this.shakingTimer)
-    this.status = 'breaking'
-    const nums = 30
-    const pieces = []
-    const min = -35
-    const max = 35
-    const minSize = 2
-    const maxSize = 7
+  breaking () {
+    return new Promise(resolve => {
+      clearInterval(this.shakingTimer)
+      this.status = 'breaking'
+      const nums = 30
+      const pieces = []
+      const min = -35
+      const max = 35
+      const minSize = 2
+      const maxSize = 7
 
-    for (let i = 0; i < nums; i++) {
-      const r = Math.floor(Math.random() * (maxSize - minSize) + minSize)
-      const x = Math.random() * (max - min) + min + this.x
-      const y = Math.random() * (max - min) + min + this.y
+      for (let i = 0; i < nums; i++) {
+        const r = Math.floor(Math.random() * (maxSize - minSize) + minSize)
+        const x = Math.random() * (max - min) + min + this.x
+        const y = Math.random() * (max - min) + min + this.y
 
-      pieces.push(new Brick({
-        sides: this.sides,
-        weight: '',
-        size: r,
-        x: x,
-        y: y,
-        xDirection: Math.random() > 0.5 ? 1 : -1,
-        rotate: Math.random() * 2 * Math.PI,
-        scale: 1,
-        alpha: Math.random() * 0.5 + 0.3,
-        color: this.color
-      }))
-    }
+        pieces.push(new Brick({
+          sides: this.sides,
+          weight: '',
+          size: r,
+          x: x,
+          y: y,
+          xDirection: Math.random() > 0.5 ? 1 : -1,
+          rotate: Math.random() * 2 * Math.PI,
+          scale: 1,
+          alpha: Math.random() * 0.5 + 0.3,
+          color: this.color
+        }))
+      }
 
-    this.pieces = pieces
+      this.pieces = pieces
 
-    let duration = 400
-    let timer = null
-    let start = new Date().getTime()
-    const pRotate = (45 * Math.PI / 180) / duration
-    const pScale = 0.4 / duration
-    const pAlpha = 0.3 / duration
-    const doing = () => {
-      const end = new Date().getTime()
-      const dtime = end - start
+      let duration = 400
+      let timer = null
+      let start = new Date().getTime()
+      const pRotate = (45 * Math.PI / 180) / duration
+      const pScale = 0.4 / duration
+      const pAlpha = 0.3 / duration
+      const doing = () => {
+        const end = new Date().getTime()
+        const dtime = end - start
 
-      start = end
-      duration -= dtime
+        start = end
+        duration -= dtime
 
-      for (let i = 0; i < pieces.length; i++) {
-        if (pieces[i].xDirection === 1) {
-          pieces[i].x += 0.1
-        } else {
-          pieces[i].x -= 0.1
+        for (let i = 0; i < pieces.length; i++) {
+          if (pieces[i].xDirection === 1) {
+            pieces[i].x += 0.1
+          } else {
+            pieces[i].x -= 0.1
+          }
+          pieces[i].y += 0.3
+          pieces[i].rotate += pRotate * dtime
+          pieces[i].scale -= pScale * dtime
+          if (duration < 0) {
+            pieces[i].alpha = 0
+          } else {
+            pieces[i].alpha -= pAlpha * dtime
+          }
         }
-        pieces[i].y += 0.3
-        pieces[i].rotate += pRotate * dtime
-        pieces[i].scale -= pScale * dtime
+
+
+        timer = requestAnimationFrame(() => {
+          doing()
+        })
+
+
         if (duration < 0) {
-          pieces[i].alpha = 0
-        } else {
-          pieces[i].alpha -= pAlpha * dtime
+          cancelAnimationFrame(timer)
+          this.status = 'breaked'
+          resolve()
         }
       }
 
-
-      timer = requestAnimationFrame(() => {
-        doing()
-      })
-
-
-      if (duration < 0) {
-        cancelAnimationFrame(timer)
-        this.status = 'breaked'
-        typeof fn === 'function' && fn()
-      }
-    }
-
-    doing()
+      doing()
+    })
 
   }
 
